@@ -823,9 +823,9 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Features
+# Dashboard
 --------------------------------------------------------------*/
-.features .icon-box {
+.dashboard .icon-box {
   display: flex;
   align-items: center;
   padding: 20px;
@@ -833,13 +833,13 @@ section {
   transition: ease-in-out 0.3s;
 }
 
-.features .icon-box i {
+.dashboard .icon-box i {
   font-size: 32px;
   padding-right: 10px;
   line-height: 1;
 }
 
-.features .icon-box h3 {
+.dashboard .icon-box h3 {
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -847,16 +847,16 @@ section {
   font-size: 16px;
 }
 
-.features .icon-box h3 a {
+.dashboard .icon-box h3 a {
   color: #222222;
   transition: ease-in-out 0.3s;
 }
 
-.features .icon-box h3 a:hover {
+.dashboard .icon-box h3 a:hover {
   color: #3498db;
 }
 
-.features .icon-box:hover {
+.dashboard .icon-box:hover {
   background: #eef7fc;
 }
 
