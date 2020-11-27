@@ -36,7 +36,7 @@
         <ul>
           <!-- <li class="active"><a href="#">Home</a></li>
           <li><a href="#dashboard">Dashboard</a></li> -->
-          <li class="get-started"><a href="#">Login</a></li>
+          <li class="get-started"><a href="login.php">Login</a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
