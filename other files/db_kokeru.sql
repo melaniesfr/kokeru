@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 25, 2020 at 10:38 AM
+-- Generation Time: Nov 28, 2020 at 05:33 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -146,6 +146,30 @@ INSERT INTO `ruang` (`id_ruang`, `nama_ruang`, `id_cs`) VALUES
 (11, 'R.149', 3),
 (12, 'R.139', 3);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL,
+  `nama` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `level` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `nama`, `email`, `password`, `level`) VALUES
+(1, 'Arif Sutowo', 'arif@manajer.com', '69b731ea8f289cf16a192ce78a37b4f0', 'Manajer'),
+(2, 'Doni Kusumah', 'doni@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(3, 'Roni Sandria Kalalo', 'roni@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(4, 'Devi Desvinta Sari', 'devi@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS');
+
 --
 -- Indexes for dumped tables
 --
@@ -187,6 +211,12 @@ ALTER TABLE `ruang`
   ADD KEY `id_cs` (`id_cs`);
 
 --
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -219,6 +249,12 @@ ALTER TABLE `pembersihan`
 --
 ALTER TABLE `ruang`
   MODIFY `id_ruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
