@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="dashboard.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
@@ -30,7 +30,7 @@
       </li>
 
       <!-- Nav Item - Utilities Collapse Menu -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
           <i class="fab fa-buromobelexperte"></i>
           <span>Ruangan</span>
@@ -38,7 +38,7 @@
         <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Macam-macam:</h6>
-            <a class="collapse-item" href="data_ruang.php">Data Ruang Lengkap</a>
+            <a class="collapse-item active" href="data_ruang.php">Data Ruang Lengkap</a>
             <a class="collapse-item" href="crud_ruang.php">CRUD Ruangan</a>
           </div>
         </div>
@@ -139,10 +139,52 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+          <h1 class="h3 mb-2 text-gray-800">Data Ruang Lengkap</h1>
+
+          <!-- Isi Tabel Data CS -->
+          <div class="card shadow mb-4">
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead class="text-center">
+                    <tr>
+                      <th>No</th>
+                      <th>Nama Ruang</th>
+                      <th>Customer Service</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <?php
+                      // Execute the query
+                      $query = "SELECT r.nama_ruang AS nama_ruang, cs.nama_cs AS nama_cs FROM ruang r JOIN cs ON r.id_cs = cs.id_cs ORDER BY id_ruang";
+                      $result = $db->query($query);
+                      if (!$result) {
+                        die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                      }
+
+                      // Fetch and display the results
+                      $i = 1;
+                      while ($row = $result->fetch_object()) {
+                        echo '<tr>';
+                        echo '<td class="text-center">'.$i.'</td>';
+                        echo '<td class="text-center">'.$row->nama_ruang.'</td>';
+                        echo '<td>'.$row->nama_cs.'</td>';
+                        echo '</tr>';
+
+                        $i++;
+                      }
+
+                      echo '</tbody>';
+                      echo '</table>';
+
+                      $result->free();
+                      $db->close();
+                    ?>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /.container-fluid -->
-      </div>
-      <!-- End of Main Content -->
 
 <?php include 'footer.php'; ?>

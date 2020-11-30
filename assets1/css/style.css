@@ -1,3 +1,13 @@
+/**
+* Template Name: Vesperr - v3.0.2
+* Template URL: https://bootstrapmade.com/vesperr-free-bootstrap-template/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
+
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
@@ -823,9 +833,9 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Dashboard
+# Features
 --------------------------------------------------------------*/
-.dashboard .icon-box {
+.features .icon-box {
   display: flex;
   align-items: center;
   padding: 20px;
@@ -833,13 +843,13 @@ section {
   transition: ease-in-out 0.3s;
 }
 
-.dashboard .icon-box i {
+.features .icon-box i {
   font-size: 32px;
   padding-right: 10px;
   line-height: 1;
 }
 
-.dashboard .icon-box h3 {
+.features .icon-box h3 {
   font-weight: 700;
   margin: 0;
   padding: 0;
@@ -847,16 +857,16 @@ section {
   font-size: 16px;
 }
 
-.dashboard .icon-box h3 a {
+.features .icon-box h3 a {
   color: #222222;
   transition: ease-in-out 0.3s;
 }
 
-.dashboard .icon-box h3 a:hover {
+.features .icon-box h3 a:hover {
   color: #3498db;
 }
 
-.dashboard .icon-box:hover {
+.features .icon-box:hover {
   background: #eef7fc;
 }
 
