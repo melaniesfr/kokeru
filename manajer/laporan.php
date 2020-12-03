@@ -15,7 +15,7 @@
       <div class="sidebar-heading">Data</div>
 
       <!-- Nav Item - Customer Service -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="data_cs.php">
           <i class="fas fa-users"></i>
           <span>Customer Service</span>
@@ -37,7 +37,7 @@
       <div class="sidebar-heading">Laporan</div>
 
       <!-- Nav Item - Laporan -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="laporan.php">
           <i class="fab fa-wpforms"></i>
           <span>Laporan Harian</span>
@@ -139,57 +139,10 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Data Customer Service</h1>
-
-          <!-- Isi Tabel Data CS -->
-          <div class="card shadow mb-4">
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <a class="btn btn-info" href="add_cs.php"><i class="fas fa-plus-circle"></i> Tambah CS</a> <br><br>
-
-                  <thead class="text-center">
-                    <tr>
-                      <th>No</th>
-                      <th>Nama Lengkap</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <?php
-                      // Execute the query
-                      $query = "SELECT * FROM cs ORDER BY id_cs";
-                      $result = $db->query($query);
-                      if (!$result) {
-                        die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
-                      }
-
-                      // Fetch and display the results
-                      $i = 1;
-                      while ($row = $result->fetch_object()) {
-                        echo '<tr>';
-                        echo '<td class="text-center">'.$i.'</td>';
-                        echo '<td>'.$row->nama_cs.'</td>';
-                        echo '<td class="text-center">
-                                <a class="btn btn-warning btn-sm" href="edit_cs.php?id='.$row->id_cs.'"><i class="fas fa-edit"></i> Edit</a>&nbsp;&nbsp;
-                                <a class="btn btn-danger btn-sm" href="delete_cs.php?id='.$row->id_cs.'"><i class="fas fa-trash-alt"></i> Delete</a>
-                              </td>';
-                        echo '</tr>';
-
-                        $i++;
-                      }
-
-                      echo '</tbody>';
-                      echo '</table>';
-
-                      $result->free();
-                      $db->close();
-                    ?>
-              </div>
-            </div>
-          </div>
+          <h1 class="h3 mb-4 text-gray-800">Page: Laporan Harian</h1>
         </div>
         <!-- /.container-fluid -->
+      </div>
+      <!-- End of Main Content -->
 
 <?php include 'footer.php'; ?>

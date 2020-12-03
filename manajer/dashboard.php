@@ -1,5 +1,8 @@
 <?php include 'header.php'; ?>
 
+      <!-- Vendor CSS Files -->
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href="dashboard.php">
@@ -14,34 +17,34 @@
       <!-- Heading -->
       <div class="sidebar-heading">Data</div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Customer Service -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link" href="data_cs.php">
           <i class="fas fa-users"></i>
           <span>Customer Service</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Macam-macam:</h6>
-            <a class="collapse-item" href="data_cs.php">Data CS Lengkap</a>
-            <a class="collapse-item" href="crud_cs.php">CRUD CS</a>
-          </div>
-        </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Nav Item - Ruangan -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link" href="data_ruang.php">
           <i class="fab fa-buromobelexperte"></i>
           <span>Ruangan</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Macam-macam:</h6>
-            <a class="collapse-item" href="data_ruang.php">Data Ruang Lengkap</a>
-            <a class="collapse-item" href="crud_ruang.php">CRUD Ruangan</a>
-          </div>
-        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading  -->
+      <div class="sidebar-heading">Laporan</div>
+
+      <!-- Nav Item - Laporan -->
+      <li class="nav-item">
+        <a class="nav-link" href="laporan.php">
+          <i class="fab fa-wpforms"></i>
+          <span>Laporan Harian</span>
+        </a>
       </li>
 
       <!-- Divider -->
@@ -139,7 +142,183 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+          <div class="container">
+            <br>
+
+            <!-- Kotak Baris 1 -->
+            <div class="row">
+              <div class="col-12">
+                <h3 class="row justify-content-center">Monitoring Kebersihan dan Kerapian Ruang</h3>
+                <h3 class="row justify-content-center">Gedung Bersama Maju</h3>
+                <h4 class="row justify-content-center">Hari Kamis Tanggal 12 November 2020 Jam 07:11 WIB</h4>
+                <br>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.123</h3>
+                    <p class="row justify-content-center">BELUM</p>
+                    <p class="row justify-content-center">Doni Kusumah</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.143</h3>
+                    <p class="row justify-content-center">BELUM</p>
+                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.183</h3>
+                    <p class="row justify-content-center">SUDAH</p>
+                    <p class="row justify-content-center">Doni Kusumah</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.129</h3>
+                    <p class="row justify-content-center">BELUM</p>
+                    <p class="row justify-content-center">Devi Deswinta Sari</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kotak Baris 2 -->
+            <div class="row">
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.122</h3>
+                    <p class="row justify-content-center">BELUM</p>
+                    <p class="row justify-content-center">Doni Kusumah</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.123</h3>
+                    <p class="row justify-content-center">BELUM</p>
+                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.163</h3>
+                    <p class="row justify-content-center">SUDAH</p>
+                    <p class="row justify-content-center">Doni Kusumah</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.149</h3>
+                    <p class="row justify-content-center">BELUM</p>
+                    <p class="row justify-content-center">Devi Deswinta Sari</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Kotak baris 3 -->
+            <div class="row">
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.121</h3>
+                    <p class="row justify-content-center">BELUM</p>
+                    <p class="row justify-content-center">Doni Kusumah</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-warning text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.113</h3>
+                    <p class="row justify-content-center">BELUM</p>
+                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.153</h3>
+                    <p class="row justify-content-center">SUDAH</p>
+                    <p class="row justify-content-center">Doni Kusumah</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-md-6">
+                <div class="card bg-success text-white mb-4">
+                  <div class="card-body">
+                    <h3 class="row justify-content-center">R.139</h3>
+                    <p class="row justify-content-center">SUDAH</p>
+                    <p class="row justify-content-center">Devi Deswinta Sari</p>
+                  </div>
+                  <div class="card-footer d-flex align-items-center justify-content-between">
+                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <!-- /.container-fluid -->
       </div>

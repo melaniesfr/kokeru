@@ -24,7 +24,7 @@
   <link href="assets1/css/style.css" rel="stylesheet">
 </head>
 
-<body>
+<body background = "assets2/img/walpaper1.jpg">
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
@@ -34,32 +34,16 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <!-- <li class="active"><a href="#">Home</a></li>
-          <li><a href="#dashboard">Dashboard</a></li> -->
           <li class="get-started"><a href="login.php">Login</a></li>
         </ul>
       </nav><!-- .nav-menu -->
     </div>
   </header><!-- End Header -->
 
-  <!-- ======= Hero Section ======= -->
-  <!-- <section id="hero" class="d-flex align-items-center">
-    <div class="container">
-        <div class="justify-content-center">
-          <h1 class="text-center" data-aos="fade-up">Lebih Mudah Monitoring Kebersihan dan Kerapian Ruang dengan KoKeRu</h1>
-          <h2 class="text-center" data-aos="fade-up" data-aos-delay="400">Anda hanya perlu mengawasi, dan pekerjaan selesai.</h2>
-        </div>
-    </div>
-  </section>End Hero -->
-
   <main id="main">
     <!-- ======= Monitoring Section ======= -->
     <section id="dashboard" class="dashboard">
       <div class="container">
-        <!-- <div class="section-title" data-aos="fade-up">
-          <h2>Dashboard</h2>
-        </div> -->
-
         <br>
 
         <!-- Kotak Baris 1 -->
@@ -170,6 +154,62 @@
               <div class="card-body">
                 <h3 class="row justify-content-center">R.149</h3>
                 <p class="row justify-content-center">BELUM</p>
+                <p class="row justify-content-center">Devi Deswinta Sari</p>
+              </div>
+              <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Kotak baris 3 -->
+        <div class="row">
+          <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+              <div class="card-body">
+                <h3 class="row justify-content-center">R.121</h3>
+                <p class="row justify-content-center">BELUM</p>
+                <p class="row justify-content-center">Doni Kusumah</p>
+              </div>
+              <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card bg-warning text-white mb-4">
+              <div class="card-body">
+                <h3 class="row justify-content-center">R.113</h3>
+                <p class="row justify-content-center">BELUM</p>
+                <p class="row justify-content-center">Roni Sandria Kalalo</p>
+              </div>
+              <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+              <div class="card-body">
+                <h3 class="row justify-content-center">R.153</h3>
+                <p class="row justify-content-center">SUDAH</p>
+                <p class="row justify-content-center">Doni Kusumah</p>
+              </div>
+              <div class="card-footer d-flex align-items-center justify-content-between">
+                <a class="small text-white stretched-link" href="#">View Details</a>
+                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-6">
+            <div class="card bg-success text-white mb-4">
+              <div class="card-body">
+                <h3 class="row justify-content-center">R.139</h3>
+                <p class="row justify-content-center">SUDAH</p>
                 <p class="row justify-content-center">Devi Deswinta Sari</p>
               </div>
               <div class="card-footer d-flex align-items-center justify-content-between">

@@ -14,34 +14,34 @@
       <!-- Heading -->
       <div class="sidebar-heading">Data</div>
 
-      <!-- Nav Item - Pages Collapse Menu -->
+      <!-- Nav Item - Customer Service -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <a class="nav-link" href="data_cs.php">
           <i class="fas fa-users"></i>
           <span>Customer Service</span>
         </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Macam-macam:</h6>
-            <a class="collapse-item" href="data_cs.php">Data CS Lengkap</a>
-            <a class="collapse-item" href="crud_cs.php">CRUD CS</a>
-          </div>
-        </div>
       </li>
 
-      <!-- Nav Item - Utilities Collapse Menu -->
+      <!-- Nav Item - Ruangan -->
       <li class="nav-item active">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link" href="data_ruang.php">
           <i class="fab fa-buromobelexperte"></i>
           <span>Ruangan</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-          <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Macam-macam:</h6>
-            <a class="collapse-item active" href="data_ruang.php">Data Ruang Lengkap</a>
-            <a class="collapse-item" href="crud_ruang.php">CRUD Ruangan</a>
-          </div>
-        </div>
+      </li>
+
+      <!-- Divider -->
+      <hr class="sidebar-divider">
+
+      <!-- Heading  -->
+      <div class="sidebar-heading">Laporan</div>
+
+      <!-- Nav Item - Laporan -->
+      <li class="nav-item">
+        <a class="nav-link" href="laporan.php">
+          <i class="fab fa-wpforms"></i>
+          <span>Laporan Harian</span>
+        </a>
       </li>
 
       <!-- Divider -->
@@ -139,25 +139,28 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Data Ruang Lengkap</h1>
+          <h1 class="h3 mb-2 text-gray-800">Data Ruangan</h1>
 
           <!-- Isi Tabel Data CS -->
           <div class="card shadow mb-4">
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <a class="btn btn-info" href="add_ruang.php"><i class="fas fa-plus-circle"></i> Tambah Ruang</a> <br><br>
+
                   <thead class="text-center">
                     <tr>
                       <th>No</th>
                       <th>Nama Ruang</th>
                       <th>Customer Service</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <?php
                       // Execute the query
-                      $query = "SELECT r.nama_ruang AS nama_ruang, cs.nama_cs AS nama_cs FROM ruang r JOIN cs ON r.id_cs = cs.id_cs ORDER BY id_ruang";
+                      $query = "SELECT r.id_ruang as id_ruang, r.nama_ruang AS nama_ruang, cs.nama_cs AS nama_cs FROM ruang r JOIN cs ON r.id_cs = cs.id_cs ORDER BY id_ruang";
                       $result = $db->query($query);
                       if (!$result) {
                         die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
@@ -170,6 +173,10 @@
                         echo '<td class="text-center">'.$i.'</td>';
                         echo '<td class="text-center">'.$row->nama_ruang.'</td>';
                         echo '<td>'.$row->nama_cs.'</td>';
+                        echo '<td class="text-center">
+                                <a class="btn btn-warning btn-sm" href="edit_ruang.php?id='.$row->id_ruang.'"><i class="fas fa-edit"></i> Edit</a>&nbsp;&nbsp;
+                                <a class="btn btn-danger btn-sm" href="delete_ruang.php?id='.$row->id_ruang.'"><i class="fas fa-trash-alt"></i> Delete</a>
+                              </td>';
                         echo '</tr>';
 
                         $i++;

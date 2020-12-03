@@ -1,5 +1,36 @@
 <?php include 'header.php'; ?>
 
+<?php
+  require_once('../lib/db_login.php');
+  $nama = '';
+
+  // Mengecek apakah user belum menekan tombol submit
+  if (isset($_POST["submit"])) {
+    $valid = TRUE;
+
+    $nama = test_input($_POST['nama']);
+    if (empty($nama)) {
+      $error_nama = 'Name is required';
+      $valid = FALSE;
+    } elseif (!preg_match('/^[a-zA-Z ]*$/', $nama)) {
+      $error_nama = 'Only letters and white space allowed';
+      $valid = FALSE;
+    }
+
+    // Add data to database
+    if ($valid) {
+      $query = "INSERT INTO cs (nama_cs) VALUES ('$nama')";
+      $result = $db->query($query);
+      if (!$result) {
+        die('Could not query the database: <br>'.$db->error.'<br>Query: '.$query);
+      } else {
+        header('Location: data_cs.php');
+        $db->close();
+      }
+    }
+  }
+?>
+
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="dashboard.php">
@@ -143,49 +174,22 @@
 
           <!-- Isi Tabel Data CS -->
           <div class="card shadow mb-4">
+            <div class="card-header text-center" style="font-weight: bold;">Tambah CS</div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <a class="btn btn-info" href="add_cs.php"><i class="fas fa-plus-circle"></i> Tambah CS</a> <br><br>
+                <form method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                  <div class="form-group">
+                    <label for="nama">Nama Customer Service</label>
+                    <input type="text" class="form-control" id="nama" name="nama" autofocus>
+                    <div class="error" style="color: red; font-size: 0.75em; padding-top: 10px; padding-left: 10px;"><?php if (isset($error_nama)) echo $error_nama; ?></div>
+                  </div>
 
-                  <thead class="text-center">
-                    <tr>
-                      <th>No</th>
-                      <th>Nama Lengkap</th>
-                      <th>Action</th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    <?php
-                      // Execute the query
-                      $query = "SELECT * FROM cs ORDER BY id_cs";
-                      $result = $db->query($query);
-                      if (!$result) {
-                        die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
-                      }
-
-                      // Fetch and display the results
-                      $i = 1;
-                      while ($row = $result->fetch_object()) {
-                        echo '<tr>';
-                        echo '<td class="text-center">'.$i.'</td>';
-                        echo '<td>'.$row->nama_cs.'</td>';
-                        echo '<td class="text-center">
-                                <a class="btn btn-warning btn-sm" href="edit_cs.php?id='.$row->id_cs.'"><i class="fas fa-edit"></i> Edit</a>&nbsp;&nbsp;
-                                <a class="btn btn-danger btn-sm" href="delete_cs.php?id='.$row->id_cs.'"><i class="fas fa-trash-alt"></i> Delete</a>
-                              </td>';
-                        echo '</tr>';
-
-                        $i++;
-                      }
-
-                      echo '</tbody>';
-                      echo '</table>';
-
-                      $result->free();
-                      $db->close();
-                    ?>
+                  <br>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-info" name="submit" value="submit"><i class="fas fa-plus"></i> Add</button>&nbsp;&nbsp;
+                    <a href="data_cs.php" class="btn btn-secondary">Back</a>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

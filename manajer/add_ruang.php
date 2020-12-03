@@ -1,5 +1,36 @@
 <?php include 'header.php'; ?>
 
+<?php
+  require_once('../lib/db_login.php');
+  $nama = $cs = '';
+
+  // Mengecek apakah user belum menekan tombol submit
+  if (isset($_POST["submit"])) {
+    $valid = TRUE;
+
+    $nama = test_input($_POST['nama']);
+    if (empty($nama)) {
+      $error_nama = 'Name is required';
+      $valid = FALSE;
+    } elseif (!preg_match('/^[a-zA-Z ]*$/', $nama)) {
+      $error_nama = 'Only letters and white space allowed';
+      $valid = FALSE;
+    }
+
+    // Add data to database
+    if ($valid) {
+      $query = "INSERT INTO ruang (nama_ruang, id_cs) VALUES ('$nama', '$cs')";
+      $result = $db->query($query);
+      if (!$result) {
+        die('Could not query the database: <br>'.$db->error.'<br>Query: '.$query);
+      } else {
+        header('Location: data_ruang.php');
+        $db->close();
+      }
+    }
+  }
+?>
+
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="dashboard.php">
@@ -15,7 +46,7 @@
       <div class="sidebar-heading">Data</div>
 
       <!-- Nav Item - Customer Service -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="data_cs.php">
           <i class="fas fa-users"></i>
           <span>Customer Service</span>
@@ -23,7 +54,7 @@
       </li>
 
       <!-- Nav Item - Ruangan -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="data_ruang.php">
           <i class="fab fa-buromobelexperte"></i>
           <span>Ruangan</span>
@@ -139,53 +170,34 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Data Customer Service</h1>
+          <h1 class="h3 mb-2 text-gray-800">Data Ruangan</h1>
 
           <!-- Isi Tabel Data CS -->
           <div class="card shadow mb-4">
+            <div class="card-header text-center" style="font-weight: bold;">Tambah Ruangan</div>
             <div class="card-body">
               <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <a class="btn btn-info" href="add_cs.php"><i class="fas fa-plus-circle"></i> Tambah CS</a> <br><br>
-
-                  <thead class="text-center">
+                <form method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+                  <table>
                     <tr>
-                      <th>No</th>
-                      <th>Nama Lengkap</th>
-                      <th>Action</th>
+                      <td>Nama Ruang</th>
+                      <td>:</td>
+                      <td><input type="text" class="form-control" id="nama" name="nama" autofocus></td>
                     </tr>
-                  </thead>
 
-                  <tbody>
-                    <?php
-                      // Execute the query
-                      $query = "SELECT * FROM cs ORDER BY id_cs";
-                      $result = $db->query($query);
-                      if (!$result) {
-                        die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
-                      }
+                    <tr>
+                      <td>Customer Service</th>
+                      <td>:</td>
+                      <td><input type="text" class="form-control" id="nama" name="nama" autofocus></td>
+                    </tr>
+                  </table>
 
-                      // Fetch and display the results
-                      $i = 1;
-                      while ($row = $result->fetch_object()) {
-                        echo '<tr>';
-                        echo '<td class="text-center">'.$i.'</td>';
-                        echo '<td>'.$row->nama_cs.'</td>';
-                        echo '<td class="text-center">
-                                <a class="btn btn-warning btn-sm" href="edit_cs.php?id='.$row->id_cs.'"><i class="fas fa-edit"></i> Edit</a>&nbsp;&nbsp;
-                                <a class="btn btn-danger btn-sm" href="delete_cs.php?id='.$row->id_cs.'"><i class="fas fa-trash-alt"></i> Delete</a>
-                              </td>';
-                        echo '</tr>';
-
-                        $i++;
-                      }
-
-                      echo '</tbody>';
-                      echo '</table>';
-
-                      $result->free();
-                      $db->close();
-                    ?>
+                  <br>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-info" name="submit" value="submit"><i class="fas fa-plus"></i> Add</button>&nbsp;&nbsp;
+                    <a href="data_cs.php" class="btn btn-secondary">Back</a>
+                  </div>
+                </form>
               </div>
             </div>
           </div>

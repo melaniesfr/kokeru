@@ -107,8 +107,6 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="register.php">Create an Account!</a>
-                    <br><br>
                     <a class="small" href="../login.php">< Back</a>
                   </div>
                 </div>
