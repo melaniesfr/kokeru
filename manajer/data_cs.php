@@ -152,6 +152,7 @@
                     <tr>
                       <th>No</th>
                       <th>Nama Lengkap</th>
+                      <th>Email</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -171,9 +172,10 @@
                         echo '<tr>';
                         echo '<td class="text-center">'.$i.'</td>';
                         echo '<td>'.$row->nama_cs.'</td>';
+                        echo '<td>'.$row->email.'</td>';
                         echo '<td class="text-center">
                                 <a class="btn btn-warning btn-sm" href="edit_cs.php?id='.$row->id_cs.'"><i class="fas fa-edit"></i> Edit</a>&nbsp;&nbsp;
-                                <a class="btn btn-danger btn-sm" href="delete_cs.php?id='.$row->id_cs.'"><i class="fas fa-trash-alt"></i> Delete</a>
+                                <a class="btn btn-danger btn-sm" href="delete_cs.php?id='.$row->nama_cs.'"><i class="fas fa-trash-alt"></i> Delete</a>
                               </td>';
                         echo '</tr>';
 

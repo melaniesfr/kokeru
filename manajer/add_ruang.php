@@ -12,8 +12,11 @@
     if (empty($nama)) {
       $error_nama = 'Name is required';
       $valid = FALSE;
-    } elseif (!preg_match('/^[a-zA-Z ]*$/', $nama)) {
-      $error_nama = 'Only letters and white space allowed';
+    }
+
+    $cs = test_input($_POST['customer']);
+    if (empty($cs)) {
+      $error_cs = 'CS is required';
       $valid = FALSE;
     }
 
@@ -180,22 +183,42 @@
                 <form method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                   <table>
                     <tr>
-                      <td>Nama Ruang</th>
-                      <td>:</td>
-                      <td><input type="text" class="form-control" id="nama" name="nama" autofocus></td>
+                      <td>Nama Ruang</td>
+                      <td><input type="text" class="form-control" id="nama" name="nama" autofocus style="margin-left: 20px;">
+                        <div class="error" style="color: red; font-size: 0.75em; padding-top: 10px; padding-bottom: 10px; padding-left: 25px;"><?php if (isset($error_nama)) echo $error_nama; ?></div>
+                      </td>
                     </tr>
 
                     <tr>
-                      <td>Customer Service</th>
-                      <td>:</td>
-                      <td><input type="text" class="form-control" id="nama" name="nama" autofocus></td>
+                      <td>Customer Service</td>
+                      <td><select name="customer" id="customer" class="form-control" style="margin-left: 20px;">
+                        <option value="">-- Select a CS --</option>
+
+                        <?php
+                          // Asign a query
+                          $query = "SELECT * FROM cs ORDER BY id_cs";
+                          $result = $db->query($query);
+
+                          if (!$result) {
+                            die ("Could not query the database: <br>".$db->error);
+                          }
+
+                          // Fetch and display the results
+                          while ($row = $result->fetch_object()) {
+                            echo '<option value="'.$row->id_cs.'">'.$row->nama_cs.'</option>';
+                          }
+
+                          $result->free();
+                          $db->close();
+                        ?>
+                      </select></td>
                     </tr>
                   </table>
 
                   <br>
                   <div class="text-center">
                     <button type="submit" class="btn btn-info" name="submit" value="submit"><i class="fas fa-plus"></i> Add</button>&nbsp;&nbsp;
-                    <a href="data_cs.php" class="btn btn-secondary">Back</a>
+                    <a href="data_ruang.php" class="btn btn-secondary">Back</a>
                   </div>
                 </form>
               </div>

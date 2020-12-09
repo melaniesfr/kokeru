@@ -20,6 +20,8 @@
 
   <!-- Custom styles for this template-->
   <link href="../assets2/css/sb-admin-2.min.css" rel="stylesheet">
+
+  <script src="ajax.js"></script>
 </head>
 
 <body id="page-top">

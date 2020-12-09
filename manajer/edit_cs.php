@@ -4,9 +4,9 @@
   require_once('../lib/db_login.php');
   $id = $_GET['id']; // Mendapatkan id_cs yang dilewatkan ke url
 
-  // Mengecek apakah user belum menekan tombol submit
-  if (!isset($_POST["submit"])) {
-    $query = "SELECT * FROM cs WHERE id_cs = ".$id."";
+  // Mengecek apakah user belum menekan tombol save
+  if (!isset($_POST["save"])) {
+    $query = "SELECT c.id_cs AS id_cs, c.nama_cs AS nama_cs, c.email AS email_cs, u.id_user AS id_user, u.nama AS nama_user, u.email AS email_user FROM cs c JOIN user u ON c.nama_cs = u.nama WHERE id_cs = ".$id."";
 
     // Execute the query
     $result = $db->query($query);
@@ -15,12 +15,17 @@
     } else {
       while ($row = $result->fetch_object()) {
         $nama = $row->nama_cs;
+        $email = $row->email_cs;
+        $id_user = $row->id_user;
+        $nama_user = $row->nama_user;
+        $email_user = $row->email_user;
       }
     }
   } else {
     $valid = TRUE; // Flag validasi
-    $nama = test_input($_POST['nama']);
-    if ($nama == '') {
+
+    $nama = $nama_user = test_input($_POST['nama']);
+    if (($nama == '') && ($nama_user == '')) {
       $error_nama = "Name is required";
       $valid = FALSE;
     } elseif (!preg_match("/^[a-zA-Z ]*$/", $nama)) {
@@ -28,13 +33,23 @@
       $valid = FALSE;
     }
 
+    $email = $email_user = test_input($_POST['email']);
+    if (($email == '') && ($email_user == '')) {
+      $error_email = "Email is required";
+      $valid = FALSE;
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $error_email = "Invalid email format";
+      $valid = FALSE;
+    }
+
     // Update data into database
     if ($valid) {
       // Asign a query
-      $query = "UPDATE cs SET nama_cs = '".$nama."' WHERE id_cs = ".$id."";
+      $query = "UPDATE cs c JOIN user u ON c.nama_cs = u.nama SET c.nama_cs = '".$nama."', c.email = '".$email."', u.nama = '".$nama."', u.email = '".$email."' WHERE c.id_cs = ".$id."";
 
       // Execute the query
       $result = $db->query($query);
+
       if (!$result) {
         die ("Could not query the database: <br>".$db->error.'<br>Query:'.$query);
       } else {
@@ -198,9 +213,15 @@
                     <div class="error" style="color: red; font-size: 0.75em; padding-top: 10px; padding-left: 10px;"><?php if (isset($error_nama)) echo $error_nama; ?></div>
                   </div>
 
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>">
+                    <div class="error" style="color: red; font-size: 0.75em; padding-top: 10px; padding-left: 10px;"><?php if (isset($error_email)) echo $error_email; ?></div>
+                  </div>
+
                   <br>
                   <div class="text-center">
-                    <button type="submit" class="btn btn-warning" name="submit" value="submit"><i class="fas fa-save"></i> Save</button>&nbsp;&nbsp;
+                    <button type="submit" class="btn btn-warning" name="save" value="save"><i class="fas fa-save"></i> Save</button>&nbsp;&nbsp;
                     <a href="data_cs.php" class="btn btn-secondary">Back</a>
                   </div>
                 </form>

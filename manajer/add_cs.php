@@ -2,7 +2,7 @@
 
 <?php
   require_once('../lib/db_login.php');
-  $nama = '';
+  $nama = $email = '';
 
   // Mengecek apakah user belum menekan tombol submit
   if (isset($_POST["submit"])) {
@@ -17,11 +17,27 @@
       $valid = FALSE;
     }
 
+    $email = test_input($_POST['email']);
+    if ($email == '') {
+      $error_email = "Email is required";
+      $valid = FALSE;
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $error_email = "Invalid email format";
+      $valid = FALSE;
+    }
+
+    $pass = 'customer';
+    $level = 'CS';
+
     // Add data to database
     if ($valid) {
-      $query = "INSERT INTO cs (nama_cs) VALUES ('$nama')";
+      $query = "INSERT INTO cs (nama_cs, email) VALUES ('$nama', '$email')";
       $result = $db->query($query);
-      if (!$result) {
+
+      $query2 = "INSERT INTO user (nama, email, password, level) VALUES ('$nama', '$email', '".md5($pass)."', '$level')";
+      $result2 = $db->query($query2);
+
+      if (!$result && !$result2) {
         die('Could not query the database: <br>'.$db->error.'<br>Query: '.$query);
       } else {
         header('Location: data_cs.php');
@@ -179,9 +195,15 @@
               <div class="table-responsive">
                 <form method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                   <div class="form-group">
-                    <label for="nama">Nama Customer Service</label>
+                    <label for="nama">Nama Lengkap</label>
                     <input type="text" class="form-control" id="nama" name="nama" autofocus>
                     <div class="error" style="color: red; font-size: 0.75em; padding-top: 10px; padding-left: 10px;"><?php if (isset($error_nama)) echo $error_nama; ?></div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                    <div class="error" style="color: red; font-size: 0.75em; padding-top: 10px; padding-left: 10px;"><?php if (isset($error_email)) echo $error_email; ?></div>
                   </div>
 
                   <br>
