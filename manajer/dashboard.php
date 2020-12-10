@@ -1,8 +1,5 @@
 <?php include 'header.php'; ?>
 
-      <!-- Vendor CSS Files -->
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href="dashboard.php">
@@ -143,16 +140,90 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="container">
+            <!-- Content Row -->
+            <div class="row">
+              <!-- Jumlah CS -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                          Jumlah CS</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-user-friends fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Jumlah Ruang -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                          Jumlah Ruang</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sudah Dibersihkan -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          Sudah Dibersihkan</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">4</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="far fa-thumbs-up fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Belum Dibersihkan -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                          Belum Dibersihkan</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-ban fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <br>
 
             <!-- Kotak Baris 1 -->
             <div class="row">
               <div class="col-12">
-                <h3 class="row justify-content-center">Monitoring Kebersihan dan Kerapian Ruang</h3>
-                <h3 class="row justify-content-center">Gedung Bersama Maju</h3>
                 <h4 class="row justify-content-center">Hari Kamis Tanggal 12 November 2020 Jam 07:11 WIB</h4>
                 <br>
               </div>
+
               <div class="col-xl-3 col-md-6">
                 <div class="card bg-warning text-white mb-4">
                   <div class="card-body">
@@ -161,7 +232,7 @@
                     <p class="row justify-content-center">Doni Kusumah</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -174,7 +245,7 @@
                     <p class="row justify-content-center">Roni Sandria Kalalo</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -187,7 +258,7 @@
                     <p class="row justify-content-center">Doni Kusumah</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -200,7 +271,7 @@
                     <p class="row justify-content-center">Devi Deswinta Sari</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -217,7 +288,7 @@
                     <p class="row justify-content-center">Doni Kusumah</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -225,12 +296,12 @@
               <div class="col-xl-3 col-md-6">
                 <div class="card bg-warning text-white mb-4">
                   <div class="card-body">
-                    <h3 class="row justify-content-center">R.123</h3>
+                    <h3 class="row justify-content-center">R.132</h3>
                     <p class="row justify-content-center">BELUM</p>
                     <p class="row justify-content-center">Roni Sandria Kalalo</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -243,7 +314,7 @@
                     <p class="row justify-content-center">Doni Kusumah</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -256,7 +327,7 @@
                     <p class="row justify-content-center">Devi Deswinta Sari</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -273,7 +344,7 @@
                     <p class="row justify-content-center">Doni Kusumah</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -286,7 +357,7 @@
                     <p class="row justify-content-center">Roni Sandria Kalalo</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -299,7 +370,7 @@
                     <p class="row justify-content-center">Doni Kusumah</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>
@@ -312,7 +383,7 @@
                     <p class="row justify-content-center">Devi Deswinta Sari</p>
                   </div>
                   <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-white stretched-link" href="#">View Details</a>
+                    <a class="small text-blue stretched-link" href="#">View Details</a>
                     <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                   </div>
                 </div>

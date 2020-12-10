@@ -139,7 +139,89 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <h1 class="h3 mb-4 text-gray-800">Page: Laporan Harian</h1>
+          <div class="row justify-content-center" style="padding-bottom: 20px;">
+            <select name="tanggal" id="tanggal" class="form-control col-4">
+              <option value="">Kamis, 10 November 2020</option>
+              <option value="">Jumat, 11 November 2020</option>
+              <option value="">Sabtu, 12 November 2020</option>
+              <option value="">Minggu, 13 November 2020</option>
+            </select>
+
+            <select name="status" id="status" class="form-control col-2" style="margin-left: 20px;">
+              <option value="semua">SEMUA</option>
+              <option value="belum">BELUM</option>
+              <option value="sudah">SUDAH</option>
+            </select>
+
+            <a href="#" class="d-none d-md-inline-block btn btn-md btn-info shadow-md" style="margin-left: 20px;">Tampil</a>
+          </div>
+
+          <div class="card shadow mb-4">
+            <br>
+            <div class="col-12">
+                <h3 class="row justify-content-center">Laporan Harian Kebersihan dan Kerapian Ruangan Gedung Bersama Maju</h3>
+                <h3 class="row justify-content-center">Hari Kamis Tanggal 10 November 2020</h3>
+                <p class="row justify-content-center">&lt;&lt;Tanggal Cetak 12 November 2020 Jam 10:10 WIB&gt;&gt;</p>
+            </div>
+
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead class="text-center">
+                    <tr>
+                      <th>No</th>
+                      <th>Ruang</th>
+                      <th>Nama CS</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+
+                  <tbody class="text-center">
+                    <?php
+                      // Execute the query
+                      $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs FROM ruang r JOIN cs ON r.id_cs = cs.id_cs ORDER BY id_ruang";
+                      $result = $db->query($query);
+                      if (!$result) {
+                        die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                      }
+
+                      // Fetch and display the results
+                      $i = 1;
+                      while ($row = $result->fetch_object()) {
+                        echo '<tr>';
+                        echo '<td class="text-center">'.$i.'</td>';
+                        echo '<td class="text-center">'.$row->nama_ruang.'</td>';
+                        echo '<td class="text-left">'.$row->nama_cs.'</td>';
+                        if (($row->nama_ruang == 'R.183') || ($row->nama_ruang == 'R.163') || ($row->nama_ruang == 'R.153') || ($row->nama_ruang == 'R.139')) {
+                          echo '<td class="text-center">SUDAH</td>';
+                        } else {
+                          echo '<td class="text-center">BELUM</td>';
+                        }
+                        echo '</tr>';
+
+                        $i++;
+                      }
+
+                      echo '</tbody>';
+                      echo '</table>';
+
+                      $result->free();
+                      $db->close();
+                    ?>
+              </div>
+            </div>
+
+            <br><br>
+            <div class="col-12" style="padding-left: 860px;">
+              <p class="row">Approval</p>
+              <br>
+              <p class="row">&lt;&lt;ttd&gt;&gt;</p>
+              <br>
+              <p class="row" style="margin-bottom: 0;">Arif Sutowo</p>
+              <p class="row">Manajer</p>
+              <br>
+            </div>
+          </div>
         </div>
         <!-- /.container-fluid -->
       </div>

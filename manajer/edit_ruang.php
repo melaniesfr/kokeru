@@ -190,9 +190,6 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Data Ruangan</h1>
-
           <!-- Isi Tabel Data CS -->
           <div class="card shadow mb-4">
             <div class="card-header text-center" style="font-weight: bold;">Edit Ruangan</div>

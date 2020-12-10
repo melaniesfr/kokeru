@@ -116,11 +116,13 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Data Ruang Lengkap</h1>
-
           <!-- Isi Tabel Data CS -->
           <div class="card shadow mb-4">
+            <br>
+            <div class="col-12">
+              <h3 class="row justify-content-center">Data Ruangan</h3>
+            </div>
+
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -129,13 +131,18 @@
                       <th>No</th>
                       <th>Nama Ruang</th>
                       <th>Customer Service</th>
+                      <th>Status</th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <?php
+                      if (isset($_SESSION['email'])) {
+                        $user = $_SESSION['email'];
+                      }
+
                       // Execute the query
-                      $query = "SELECT r.nama_ruang AS nama_ruang, cs.nama_cs AS nama_cs FROM ruang r JOIN cs ON r.id_cs = cs.id_cs ORDER BY id_ruang";
+                      $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs FROM ruang r JOIN cs ON r.id_cs = cs.id_cs WHERE email = '".$user."' ORDER BY id_ruang";
                       $result = $db->query($query);
                       if (!$result) {
                         die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
@@ -148,6 +155,11 @@
                         echo '<td class="text-center">'.$i.'</td>';
                         echo '<td class="text-center">'.$row->nama_ruang.'</td>';
                         echo '<td>'.$row->nama_cs.'</td>';
+                        if (($row->nama_ruang == 'R.183') || ($row->nama_ruang == 'R.163') || ($row->nama_ruang == 'R.153') || ($row->nama_ruang == 'R.139')) {
+                          echo '<td class="text-center">SUDAH</td>';
+                        } else {
+                          echo '<td class="text-center">BELUM</td>';
+                        }
                         echo '</tr>';
 
                         $i++;

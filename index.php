@@ -126,7 +126,7 @@
           <div class="col-xl-3 col-md-6">
             <div class="card bg-warning text-white mb-4">
               <div class="card-body">
-                <h3 class="row justify-content-center">R.123</h3>
+                <h3 class="row justify-content-center">R.132</h3>
                 <p class="row justify-content-center">BELUM</p>
                 <p class="row justify-content-center">Roni Sandria Kalalo</p>
               </div>

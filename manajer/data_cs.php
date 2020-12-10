@@ -138,11 +138,13 @@
 
         <!-- Begin Page Content -->
         <div class="container-fluid">
-          <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Data Customer Service</h1>
-
           <!-- Isi Tabel Data CS -->
           <div class="card shadow mb-4">
+            <br>
+            <div class="col-12">
+              <h3 class="row justify-content-center">Data Customer Service</h3>
+            </div>
+
             <div class="card-body">
               <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
