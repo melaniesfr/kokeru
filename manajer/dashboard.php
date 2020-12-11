@@ -150,7 +150,20 @@
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                           Jumlah CS</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                        <?php
+                          $query = "SELECT id_cs FROM cs ORDER BY id_cs";
+                          $result = $db->query($query);
+                          if (!$result) {
+                            die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                          }
+
+                          $i = 0;
+                          while ($row = $result->fetch_object()) {
+                            $i++;
+                          }
+
+                          echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$i.'</div>';
+                        ?>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-user-friends fa-2x text-gray-300"></i>
@@ -168,7 +181,20 @@
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                           Jumlah Ruang</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                        <?php
+                          $query = "SELECT id_ruang FROM ruang ORDER BY id_ruang";
+                          $result = $db->query($query);
+                          if (!$result) {
+                            die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                          }
+
+                          $i = 0;
+                          while ($row = $result->fetch_object()) {
+                            $i++;
+                          }
+
+                          echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$i.'</div>';
+                        ?>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
@@ -186,7 +212,22 @@
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                           Sudah Dibersihkan</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">4</div>
+                        <?php
+                          $query = "SELECT id_laporan, status FROM laporan ORDER BY id_laporan";
+                          $result = $db->query($query);
+                          if (!$result) {
+                            die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                          }
+
+                          $i = 0;
+                          while ($row = $result->fetch_object()) {
+                            if ($row->status == "SUDAH") {
+                              $i++;
+                            }
+                          }
+
+                          echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$i.'</div>';
+                        ?>
                       </div>
                       <div class="col-auto">
                         <i class="far fa-thumbs-up fa-2x text-gray-300"></i>
@@ -204,7 +245,22 @@
                       <div class="col mr-2">
                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                           Belum Dibersihkan</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+                        <?php
+                          $query = "SELECT id_laporan, status FROM laporan ORDER BY id_laporan";
+                          $result = $db->query($query);
+                          if (!$result) {
+                            die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                          }
+
+                          $i = 0;
+                          while ($row = $result->fetch_object()) {
+                            if ($row->status == "BELUM") {
+                              $i++;
+                            }
+                          }
+
+                          echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$i.'</div>';
+                        ?>
                       </div>
                       <div class="col-auto">
                         <i class="fas fa-ban fa-2x text-gray-300"></i>
@@ -217,177 +273,60 @@
 
             <br>
 
-            <!-- Kotak Baris 1 -->
             <div class="row">
               <div class="col-12">
-                <h4 class="row justify-content-center">Hari Kamis Tanggal 12 November 2020 Jam 07:11 WIB</h4>
+                <?php
+                  date_default_timezone_set('Asia/Jakarta');
+                  if (date('N') == 1) {
+                    $day = "Senin";
+                  } else if (date('N') == 2) {
+                    $day = "Selasa";
+                  } else if (date('N') == 3) {
+                    $day = "Rabu";
+                  } else if (date('N') == 4) {
+                    $day = "Kamis";
+                  } else if (date('N') == 5) {
+                    $day = "Jumat";
+                  } else if (date('N') == 6) {
+                    $day = "Sabtu";
+                  } else if (date('N') == 7) {
+                    $day = "Minggu";
+                  }
+                  echo '<h4 class="row justify-content-center">Hari '.$day.' Tanggal '.date('d F Y').' Jam '.date('H:i:s').' WIB</h4>';
+                ?>
                 <br>
               </div>
 
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.123</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.143</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.183</h3>
-                    <p class="row justify-content-center">SUDAH</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.129</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Devi Deswinta Sari</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <?php
+                date_default_timezone_set('Asia/Jakarta');
+                // $tanggal = date('Y-m-d');
+                $tanggal = '2020-12-11';
 
-            <!-- Kotak Baris 2 -->
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.122</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.132</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.163</h3>
-                    <p class="row justify-content-center">SUDAH</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.149</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Devi Deswinta Sari</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.id_laporan AS id_laporan, l.status AS status, l.tanggal AS tanggal FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
+                $result = $db->query($query);
+                if (!$result) {
+                  die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                }
 
-            <!-- Kotak baris 3 -->
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.121</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.113</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.153</h3>
-                    <p class="row justify-content-center">SUDAH</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.139</h3>
-                    <p class="row justify-content-center">SUDAH</p>
-                    <p class="row justify-content-center">Devi Deswinta Sari</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
+                while ($row = $result->fetch_object()) {
+                  echo '<div class="col-xl-3 col-md-6">';
+                  if ($row->status == "SUDAH") {
+                    echo '  <div class="card bg-success text-white mb-4">';
+                  } else {
+                    echo '  <div class="card bg-warning text-white mb-4">';
+                  }
+                  echo '    <div class="card-body">';
+                  echo '      <h3 class="row justify-content-center">'.$row->nama_ruang.'</h3>';
+                  echo '      <p class="row justify-content-center">'.$row->status.'</p>';
+                  echo '      <p class="row justify-content-center">'.$row->nama_cs.'</p>';
+                  echo '    </div>';
+                  echo '    <div class="card-footer d-flex align-items-center justify-content-between">';
+                  echo '      <a class="small text-blue stretched-link" href="bukti.php?id='.$row->id_laporan.'">View Details</a>';
+                  echo '    </div>';
+                  echo '  </div>';
+                  echo '</div>';
+                }
+              ?>
             </div>
           </div>
         </div>

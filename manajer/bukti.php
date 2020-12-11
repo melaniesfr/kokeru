@@ -1,7 +1,7 @@
 <?php include 'header.php'; ?>
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="dashboard.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span>
@@ -37,7 +37,7 @@
       <div class="sidebar-heading">Laporan</div>
 
       <!-- Nav Item - Laporan -->
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="laporan.php">
           <i class="fab fa-wpforms"></i>
           <span>Laporan Harian</span>
@@ -139,93 +139,51 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
           <!-- Page Heading -->
-          <div class="row justify-content-center" style="padding-bottom: 20px;">
-            <select name="tanggal" id="tanggal" class="form-control col-4">
-              <option value="">Kamis, 10 November 2020</option>
-              <option value="">Jumat, 11 November 2020</option>
-              <option value="">Sabtu, 12 November 2020</option>
-              <option value="">Minggu, 13 November 2020</option>
-            </select>
+          <a href="dashboard.php" class="btn btn-secondary btn-icon-split">
+            <span class="icon text-white-50">
+              <i class="fas fa-arrow-left"></i>
+            </span>
+            <span class="text">Back</span>
+          </a>
 
-            <select name="status" id="status" class="form-control col-2" style="margin-left: 20px;">
-              <option value="semua">SEMUA</option>
-              <option value="belum">BELUM</option>
-              <option value="sudah">SUDAH</option>
-            </select>
+          <br><br>
+          <div class="card shadow mb-4 bg-primary">
+            <div class="card-header bg-warning text-center" style="margin-bottom: 20px; font-size: 20px; color: white; font-weight: bold;">Bukti Kebersihan dan Kerapian</div>
 
-            <a href="#" class="d-none d-md-inline-block btn btn-md btn-info shadow-md" style="margin-left: 20px;">Tampil</a>
-          </div>
+            <div class="row justify-content-center">
+              <div class="col-sm-3">
+                <div class="card bg-white text-white mb-4">
+                  <div class="card-body" style="weight: 200px; height: 200px;">
+                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
+                  </div>
+                </div>
+              </div>
 
-          <div class="card shadow mb-4">
-            <br>
-            <div class="col-12">
-                <h3 class="row justify-content-center">Laporan Harian Kebersihan dan Kerapian Ruangan Gedung Bersama Maju</h3>
-                <h3 class="row justify-content-center">Hari Kamis Tanggal 10 November 2020</h3>
-                <?php
-                  date_default_timezone_set('Asia/Jakarta');
-                  echo '<p class="row justify-content-center">&lt;&lt;Tanggal Cetak '.date('d F Y').' Jam '.date('H:i').' WIB&gt;&gt;</p>';
-                ?>
-            </div>
-
-            <div class="card-body">
-              <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead class="text-center">
-                    <tr>
-                      <th>No</th>
-                      <th>Ruang</th>
-                      <th>Nama CS</th>
-                      <th>Status</th>
-                    </tr>
-                  </thead>
-
-                  <tbody class="text-center">
-                    <?php
-                      date_default_timezone_set('Asia/Jakarta');
-                      // $tanggal = date('Y-m-d');
-                      $tanggal = '2020-12-11';
-
-                      $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
-                      $result = $db->query($query);
-                      if (!$result) {
-                        die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
-                      }
-
-                      // Fetch and display the results
-                      $i = 1;
-                      while ($row = $result->fetch_object()) {
-                        echo '<tr>';
-                        echo '<td class="text-center">'.$i.'</td>';
-                        echo '<td class="text-center">'.$row->nama_ruang.'</td>';
-                        echo '<td class="text-left">'.$row->nama_cs.'</td>';
-                        if ($row->status == 'SUDAH') {
-                          echo '<td class="text-center">SUDAH</td>';
-                        } else {
-                          echo '<td class="text-center">BELUM</td>';
-                        }
-                        echo '</tr>';
-
-                        $i++;
-                      }
-
-                      echo '</tbody>';
-                      echo '</table>';
-
-                      $result->free();
-                      $db->close();
-                    ?>
+              <div class="col-sm-3">
+                <div class="card bg-white text-white mb-4">
+                  <div class="card-body" style="weight: 200px; height: 200px;">
+                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <br><br>
-            <div class="col-12" style="padding-left: 860px;">
-              <p class="row">Approval</p>
-              <br>
-              <p class="row">&lt;&lt;ttd&gt;&gt;</p>
-              <br>
-              <p class="row" style="margin-bottom: 0;">Arif Sutowo</p>
-              <p class="row">Manajer</p>
-              <br>
+            <div class="row justify-content-center">
+              <div class="col-sm-3">
+                <div class="card bg-white text-white mb-4">
+                  <div class="card-body" style="weight: 200px; height: 200px;">
+                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-sm-3">
+                <div class="card bg-white text-white mb-4">
+                  <div class="card-body" style="weight: 200px; height: 200px;">
+                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
