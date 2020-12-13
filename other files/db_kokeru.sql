@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2020 at 05:33 AM
+-- Generation Time: Dec 13, 2020 at 06:16 AM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -25,24 +25,27 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `bukti_kebersihan`
+-- Table structure for table `bukti`
 --
 
-CREATE TABLE `bukti_kebersihan` (
+CREATE TABLE `bukti` (
   `id_bukti` int(11) NOT NULL,
-  `id_ruang` int(11) NOT NULL,
-  `tanggal` datetime NOT NULL
+  `id_laporan` int(11) NOT NULL,
+  `nama_file` varchar(100) NOT NULL,
+  `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `bukti_kebersihan`
+-- Triggers `bukti`
 --
-
-INSERT INTO `bukti_kebersihan` (`id_bukti`, `id_ruang`, `tanggal`) VALUES
-(1, 7, '2020-11-12 07:11:00'),
-(2, 8, '2020-11-12 07:11:00'),
-(3, 9, '2020-11-12 07:11:00'),
-(4, 12, '2020-11-12 07:11:00');
+DELIMITER $$
+CREATE TRIGGER `update_status_sudah` AFTER INSERT ON `bukti` FOR EACH ROW UPDATE laporan l JOIN bukti b
+ON l.id_laporan = b.id_laporan
+SET l.status = "SUDAH",
+l.tanggal = NOW()
+WHERE l.id_laporan = b.id_laporan
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -52,69 +55,644 @@ INSERT INTO `bukti_kebersihan` (`id_bukti`, `id_ruang`, `tanggal`) VALUES
 
 CREATE TABLE `cs` (
   `id_cs` int(11) NOT NULL,
-  `nama_cs` varchar(50) NOT NULL
+  `nama_cs` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `cs`
 --
 
-INSERT INTO `cs` (`id_cs`, `nama_cs`) VALUES
-(1, 'Doni Kusumah'),
-(2, 'Roni Sandria Kalalo'),
-(3, 'Devi Desvinta Sari');
+INSERT INTO `cs` (`id_cs`, `nama_cs`, `email`) VALUES
+(1, 'Doni Kusumah', 'doni@cs.com'),
+(2, 'Roni Sandria Kalalo', 'roni@cs.com'),
+(3, 'Devi Desvinta Sari', 'devi@cs.com'),
+(4, 'Andi Sudrajat', 'andi@cs.com'),
+(5, 'Aksa Yustisio', 'aksa@cs.com'),
+(6, 'Elvina Gayatri', 'elvina@cs.com'),
+(7, 'Gavin Delano', 'gavin@cs.com'),
+(8, 'Zara Ghania', 'zara@cs.com'),
+(9, 'Kyla Jovita', 'kyla@cs.com'),
+(10, 'Keenan Bagaskara', 'keenan@cs.com');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `media`
+-- Table structure for table `laporan`
 --
 
-CREATE TABLE `media` (
-  `id_media` int(11) NOT NULL,
-  `id_bukti` int(11) NOT NULL,
-  `media` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `media`
---
-
-INSERT INTO `media` (`id_media`, `id_bukti`, `media`) VALUES
-(1, 1, 'photo'),
-(2, 1, 'photo'),
-(3, 1, 'video'),
-(4, 2, 'photo'),
-(5, 2, 'video'),
-(6, 3, 'photo'),
-(7, 3, 'photo'),
-(8, 3, 'photo'),
-(9, 4, 'photo'),
-(10, 4, 'video');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `pembersihan`
---
-
-CREATE TABLE `pembersihan` (
-  `id_pembersihan` int(11) NOT NULL,
+CREATE TABLE `laporan` (
+  `id_laporan` int(11) NOT NULL,
   `id_ruang` int(11) NOT NULL,
-  `id_cs` int(11) NOT NULL,
-  `id_bukti` int(11) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(10) NOT NULL,
+  `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `pembersihan`
+-- Dumping data for table `laporan`
 --
 
-INSERT INTO `pembersihan` (`id_pembersihan`, `id_ruang`, `id_cs`, `id_bukti`, `status`) VALUES
-(1, 7, 1, 1, 'SUDAH'),
-(2, 8, 1, 2, 'SUDAH'),
-(3, 9, 1, 3, 'SUDAH'),
-(4, 12, 3, 4, 'SUDAH');
+INSERT INTO `laporan` (`id_laporan`, `id_ruang`, `status`, `tanggal`) VALUES
+(1, 1, 'BELUM', '2020-11-16'),
+(2, 2, 'BELUM', '2020-11-16'),
+(3, 3, 'BELUM', '2020-11-16'),
+(4, 4, 'BELUM', '2020-11-16'),
+(5, 5, 'BELUM', '2020-11-16'),
+(6, 6, 'BELUM', '2020-11-16'),
+(7, 7, 'BELUM', '2020-11-16'),
+(8, 8, 'BELUM', '2020-11-16'),
+(9, 9, 'BELUM', '2020-11-16'),
+(10, 10, 'BELUM', '2020-11-16'),
+(11, 11, 'BELUM', '2020-11-16'),
+(12, 12, 'BELUM', '2020-11-16'),
+(13, 13, 'BELUM', '2020-11-16'),
+(14, 14, 'BELUM', '2020-11-16'),
+(15, 15, 'BELUM', '2020-11-16'),
+(16, 16, 'BELUM', '2020-11-16'),
+(17, 17, 'BELUM', '2020-11-16'),
+(18, 18, 'BELUM', '2020-11-16'),
+(19, 19, 'BELUM', '2020-11-16'),
+(20, 20, 'BELUM', '2020-11-16'),
+(21, 1, 'BELUM', '2020-11-17'),
+(22, 2, 'BELUM', '2020-11-17'),
+(23, 3, 'BELUM', '2020-11-17'),
+(24, 4, 'BELUM', '2020-11-17'),
+(25, 5, 'BELUM', '2020-11-17'),
+(26, 6, 'BELUM', '2020-11-17'),
+(27, 7, 'BELUM', '2020-11-17'),
+(28, 8, 'BELUM', '2020-11-17'),
+(29, 9, 'BELUM', '2020-11-17'),
+(30, 10, 'BELUM', '2020-11-17'),
+(31, 11, 'BELUM', '2020-11-17'),
+(32, 12, 'BELUM', '2020-11-17'),
+(33, 13, 'BELUM', '2020-11-17'),
+(34, 14, 'BELUM', '2020-11-17'),
+(35, 15, 'BELUM', '2020-11-17'),
+(36, 16, 'BELUM', '2020-11-17'),
+(37, 17, 'BELUM', '2020-11-17'),
+(38, 18, 'BELUM', '2020-11-17'),
+(39, 19, 'BELUM', '2020-11-17'),
+(40, 20, 'BELUM', '2020-11-17'),
+(41, 1, 'BELUM', '2020-11-18'),
+(42, 2, 'BELUM', '2020-11-18'),
+(43, 3, 'BELUM', '2020-11-18'),
+(44, 4, 'BELUM', '2020-11-18'),
+(45, 5, 'BELUM', '2020-11-18'),
+(46, 6, 'BELUM', '2020-11-18'),
+(47, 7, 'BELUM', '2020-11-18'),
+(48, 8, 'BELUM', '2020-11-18'),
+(49, 9, 'BELUM', '2020-11-18'),
+(50, 10, 'BELUM', '2020-11-18'),
+(51, 11, 'BELUM', '2020-11-18'),
+(52, 12, 'BELUM', '2020-11-18'),
+(53, 13, 'BELUM', '2020-11-18'),
+(54, 14, 'BELUM', '2020-11-18'),
+(55, 15, 'BELUM', '2020-11-18'),
+(56, 16, 'BELUM', '2020-11-18'),
+(57, 17, 'BELUM', '2020-11-18'),
+(58, 18, 'BELUM', '2020-11-18'),
+(59, 19, 'BELUM', '2020-11-18'),
+(60, 20, 'BELUM', '2020-11-18'),
+(61, 1, 'BELUM', '2020-11-19'),
+(62, 2, 'BELUM', '2020-11-19'),
+(63, 3, 'BELUM', '2020-11-19'),
+(64, 4, 'BELUM', '2020-11-19'),
+(65, 5, 'BELUM', '2020-11-19'),
+(66, 6, 'BELUM', '2020-11-19'),
+(67, 7, 'BELUM', '2020-11-19'),
+(68, 8, 'BELUM', '2020-11-19'),
+(69, 9, 'BELUM', '2020-11-19'),
+(70, 10, 'BELUM', '2020-11-19'),
+(71, 11, 'BELUM', '2020-11-19'),
+(72, 12, 'BELUM', '2020-11-19'),
+(73, 13, 'BELUM', '2020-11-19'),
+(74, 14, 'BELUM', '2020-11-19'),
+(75, 15, 'BELUM', '2020-11-19'),
+(76, 16, 'BELUM', '2020-11-19'),
+(77, 17, 'BELUM', '2020-11-19'),
+(78, 18, 'BELUM', '2020-11-19'),
+(79, 19, 'BELUM', '2020-11-19'),
+(80, 20, 'BELUM', '2020-11-19'),
+(81, 1, 'BELUM', '2020-11-20'),
+(82, 2, 'BELUM', '2020-11-20'),
+(83, 3, 'BELUM', '2020-11-20'),
+(84, 4, 'BELUM', '2020-11-20'),
+(85, 5, 'BELUM', '2020-11-20'),
+(86, 6, 'BELUM', '2020-11-20'),
+(87, 7, 'BELUM', '2020-11-20'),
+(88, 8, 'BELUM', '2020-11-20'),
+(89, 9, 'BELUM', '2020-11-20'),
+(90, 10, 'BELUM', '2020-11-20'),
+(91, 11, 'BELUM', '2020-11-20'),
+(92, 12, 'BELUM', '2020-11-20'),
+(93, 13, 'BELUM', '2020-11-20'),
+(94, 14, 'BELUM', '2020-11-20'),
+(95, 15, 'BELUM', '2020-11-20'),
+(96, 16, 'BELUM', '2020-11-20'),
+(97, 17, 'BELUM', '2020-11-20'),
+(98, 18, 'BELUM', '2020-11-20'),
+(99, 19, 'BELUM', '2020-11-20'),
+(100, 20, 'BELUM', '2020-11-20'),
+(101, 1, 'BELUM', '2020-11-21'),
+(102, 2, 'BELUM', '2020-11-21'),
+(103, 3, 'BELUM', '2020-11-21'),
+(104, 4, 'BELUM', '2020-11-21'),
+(105, 5, 'BELUM', '2020-11-21'),
+(106, 6, 'BELUM', '2020-11-21'),
+(107, 7, 'BELUM', '2020-11-21'),
+(108, 8, 'BELUM', '2020-11-21'),
+(109, 9, 'BELUM', '2020-11-21'),
+(110, 10, 'BELUM', '2020-11-21'),
+(111, 11, 'BELUM', '2020-11-21'),
+(112, 12, 'BELUM', '2020-11-21'),
+(113, 13, 'BELUM', '2020-11-21'),
+(114, 14, 'BELUM', '2020-11-21'),
+(115, 15, 'BELUM', '2020-11-21'),
+(116, 16, 'BELUM', '2020-11-21'),
+(117, 17, 'BELUM', '2020-11-21'),
+(118, 18, 'BELUM', '2020-11-21'),
+(119, 19, 'BELUM', '2020-11-21'),
+(120, 20, 'BELUM', '2020-11-21'),
+(121, 1, 'BELUM', '2020-11-22'),
+(122, 2, 'BELUM', '2020-11-22'),
+(123, 3, 'BELUM', '2020-11-22'),
+(124, 4, 'BELUM', '2020-11-22'),
+(125, 5, 'BELUM', '2020-11-22'),
+(126, 6, 'BELUM', '2020-11-22'),
+(127, 7, 'BELUM', '2020-11-22'),
+(128, 8, 'BELUM', '2020-11-22'),
+(129, 9, 'BELUM', '2020-11-22'),
+(130, 10, 'BELUM', '2020-11-22'),
+(131, 11, 'BELUM', '2020-11-22'),
+(132, 12, 'BELUM', '2020-11-22'),
+(133, 13, 'BELUM', '2020-11-22'),
+(134, 14, 'BELUM', '2020-11-22'),
+(135, 15, 'BELUM', '2020-11-22'),
+(136, 16, 'BELUM', '2020-11-22'),
+(137, 17, 'BELUM', '2020-11-22'),
+(138, 18, 'BELUM', '2020-11-22'),
+(139, 19, 'BELUM', '2020-11-22'),
+(140, 20, 'BELUM', '2020-11-22'),
+(141, 1, 'BELUM', '2020-11-23'),
+(142, 2, 'BELUM', '2020-11-23'),
+(143, 3, 'BELUM', '2020-11-23'),
+(144, 4, 'BELUM', '2020-11-23'),
+(145, 5, 'BELUM', '2020-11-23'),
+(146, 6, 'BELUM', '2020-11-23'),
+(147, 7, 'BELUM', '2020-11-23'),
+(148, 8, 'BELUM', '2020-11-23'),
+(149, 9, 'BELUM', '2020-11-23'),
+(150, 10, 'BELUM', '2020-11-23'),
+(151, 11, 'BELUM', '2020-11-23'),
+(152, 12, 'BELUM', '2020-11-23'),
+(153, 13, 'BELUM', '2020-11-23'),
+(154, 14, 'BELUM', '2020-11-23'),
+(155, 15, 'BELUM', '2020-11-23'),
+(156, 16, 'BELUM', '2020-11-23'),
+(157, 17, 'BELUM', '2020-11-23'),
+(158, 18, 'BELUM', '2020-11-23'),
+(159, 19, 'BELUM', '2020-11-23'),
+(160, 20, 'BELUM', '2020-11-23'),
+(161, 1, 'BELUM', '2020-11-24'),
+(162, 2, 'BELUM', '2020-11-24'),
+(163, 3, 'BELUM', '2020-11-24'),
+(164, 4, 'BELUM', '2020-11-24'),
+(165, 5, 'BELUM', '2020-11-24'),
+(166, 6, 'BELUM', '2020-11-24'),
+(167, 7, 'BELUM', '2020-11-24'),
+(168, 8, 'BELUM', '2020-11-24'),
+(169, 9, 'BELUM', '2020-11-24'),
+(170, 10, 'BELUM', '2020-11-24'),
+(171, 11, 'BELUM', '2020-11-24'),
+(172, 12, 'BELUM', '2020-11-24'),
+(173, 13, 'BELUM', '2020-11-24'),
+(174, 14, 'BELUM', '2020-11-24'),
+(175, 15, 'BELUM', '2020-11-24'),
+(176, 16, 'BELUM', '2020-11-24'),
+(177, 17, 'BELUM', '2020-11-24'),
+(178, 18, 'BELUM', '2020-11-24'),
+(179, 19, 'BELUM', '2020-11-24'),
+(180, 20, 'BELUM', '2020-11-24'),
+(181, 1, 'BELUM', '2020-11-25'),
+(182, 2, 'BELUM', '2020-11-25'),
+(183, 3, 'BELUM', '2020-11-25'),
+(184, 4, 'BELUM', '2020-11-25'),
+(185, 5, 'BELUM', '2020-11-25'),
+(186, 6, 'BELUM', '2020-11-25'),
+(187, 7, 'BELUM', '2020-11-25'),
+(188, 8, 'BELUM', '2020-11-25'),
+(189, 9, 'BELUM', '2020-11-25'),
+(190, 10, 'BELUM', '2020-11-25'),
+(191, 11, 'BELUM', '2020-11-25'),
+(192, 12, 'BELUM', '2020-11-25'),
+(193, 13, 'BELUM', '2020-11-25'),
+(194, 14, 'BELUM', '2020-11-25'),
+(195, 15, 'BELUM', '2020-11-25'),
+(196, 16, 'BELUM', '2020-11-25'),
+(197, 17, 'BELUM', '2020-11-25'),
+(198, 18, 'BELUM', '2020-11-25'),
+(199, 19, 'BELUM', '2020-11-25'),
+(200, 20, 'BELUM', '2020-11-25'),
+(201, 1, 'BELUM', '2020-11-26'),
+(202, 2, 'BELUM', '2020-11-26'),
+(203, 3, 'BELUM', '2020-11-26'),
+(204, 4, 'BELUM', '2020-11-26'),
+(205, 5, 'BELUM', '2020-11-26'),
+(206, 6, 'BELUM', '2020-11-26'),
+(207, 7, 'BELUM', '2020-11-26'),
+(208, 8, 'BELUM', '2020-11-26'),
+(209, 9, 'BELUM', '2020-11-26'),
+(210, 10, 'BELUM', '2020-11-26'),
+(211, 11, 'BELUM', '2020-11-26'),
+(212, 12, 'BELUM', '2020-11-26'),
+(213, 13, 'BELUM', '2020-11-26'),
+(214, 14, 'BELUM', '2020-11-26'),
+(215, 15, 'BELUM', '2020-11-26'),
+(216, 16, 'BELUM', '2020-11-26'),
+(217, 17, 'BELUM', '2020-11-26'),
+(218, 18, 'BELUM', '2020-11-26'),
+(219, 19, 'BELUM', '2020-11-26'),
+(220, 20, 'BELUM', '2020-11-26'),
+(221, 1, 'BELUM', '2020-11-27'),
+(222, 2, 'BELUM', '2020-11-27'),
+(223, 3, 'BELUM', '2020-11-27'),
+(224, 4, 'BELUM', '2020-11-27'),
+(225, 5, 'BELUM', '2020-11-27'),
+(226, 6, 'BELUM', '2020-11-27'),
+(227, 7, 'BELUM', '2020-11-27'),
+(228, 8, 'BELUM', '2020-11-27'),
+(229, 9, 'BELUM', '2020-11-27'),
+(230, 10, 'BELUM', '2020-11-27'),
+(231, 11, 'BELUM', '2020-11-27'),
+(232, 12, 'BELUM', '2020-11-27'),
+(233, 13, 'BELUM', '2020-11-27'),
+(234, 14, 'BELUM', '2020-11-27'),
+(235, 15, 'BELUM', '2020-11-27'),
+(236, 16, 'BELUM', '2020-11-27'),
+(237, 17, 'BELUM', '2020-11-27'),
+(238, 18, 'BELUM', '2020-11-27'),
+(239, 19, 'BELUM', '2020-11-27'),
+(240, 20, 'BELUM', '2020-11-27'),
+(241, 1, 'BELUM', '2020-11-28'),
+(242, 2, 'BELUM', '2020-11-28'),
+(243, 3, 'BELUM', '2020-11-28'),
+(244, 4, 'BELUM', '2020-11-28'),
+(245, 5, 'BELUM', '2020-11-28'),
+(246, 6, 'BELUM', '2020-11-28'),
+(247, 7, 'BELUM', '2020-11-28'),
+(248, 8, 'BELUM', '2020-11-28'),
+(249, 9, 'BELUM', '2020-11-28'),
+(250, 10, 'BELUM', '2020-11-28'),
+(251, 11, 'BELUM', '2020-11-28'),
+(252, 12, 'BELUM', '2020-11-28'),
+(253, 13, 'BELUM', '2020-11-28'),
+(254, 14, 'BELUM', '2020-11-28'),
+(255, 15, 'BELUM', '2020-11-28'),
+(256, 16, 'BELUM', '2020-11-28'),
+(257, 17, 'BELUM', '2020-11-28'),
+(258, 18, 'BELUM', '2020-11-28'),
+(259, 19, 'BELUM', '2020-11-28'),
+(260, 20, 'BELUM', '2020-11-28'),
+(261, 1, 'BELUM', '2020-11-29'),
+(262, 2, 'BELUM', '2020-11-29'),
+(263, 3, 'BELUM', '2020-11-29'),
+(264, 4, 'BELUM', '2020-11-29'),
+(265, 5, 'BELUM', '2020-11-29'),
+(266, 6, 'BELUM', '2020-11-29'),
+(267, 7, 'BELUM', '2020-11-29'),
+(268, 8, 'BELUM', '2020-11-29'),
+(269, 9, 'BELUM', '2020-11-29'),
+(270, 10, 'BELUM', '2020-11-29'),
+(271, 11, 'BELUM', '2020-11-29'),
+(272, 12, 'BELUM', '2020-11-29'),
+(273, 13, 'BELUM', '2020-11-29'),
+(274, 14, 'BELUM', '2020-11-29'),
+(275, 15, 'BELUM', '2020-11-29'),
+(276, 16, 'BELUM', '2020-11-29'),
+(277, 17, 'BELUM', '2020-11-29'),
+(278, 18, 'BELUM', '2020-11-29'),
+(279, 19, 'BELUM', '2020-11-29'),
+(280, 20, 'BELUM', '2020-11-29'),
+(281, 1, 'BELUM', '2020-11-30'),
+(282, 2, 'BELUM', '2020-11-30'),
+(283, 3, 'BELUM', '2020-11-30'),
+(284, 4, 'BELUM', '2020-11-30'),
+(285, 5, 'BELUM', '2020-11-30'),
+(286, 6, 'BELUM', '2020-11-30'),
+(287, 7, 'BELUM', '2020-11-30'),
+(288, 8, 'BELUM', '2020-11-30'),
+(289, 9, 'BELUM', '2020-11-30'),
+(290, 10, 'BELUM', '2020-11-30'),
+(291, 11, 'BELUM', '2020-11-30'),
+(292, 12, 'BELUM', '2020-11-30'),
+(293, 13, 'BELUM', '2020-11-30'),
+(294, 14, 'BELUM', '2020-11-30'),
+(295, 15, 'BELUM', '2020-11-30'),
+(296, 16, 'BELUM', '2020-11-30'),
+(297, 17, 'BELUM', '2020-11-30'),
+(298, 18, 'BELUM', '2020-11-30'),
+(299, 19, 'BELUM', '2020-11-30'),
+(300, 20, 'BELUM', '2020-11-30'),
+(301, 1, 'BELUM', '2020-12-01'),
+(302, 2, 'BELUM', '2020-12-01'),
+(303, 3, 'BELUM', '2020-12-01'),
+(304, 4, 'BELUM', '2020-12-01'),
+(305, 5, 'BELUM', '2020-12-01'),
+(306, 6, 'BELUM', '2020-12-01'),
+(307, 7, 'BELUM', '2020-12-01'),
+(308, 8, 'BELUM', '2020-12-01'),
+(309, 9, 'BELUM', '2020-12-01'),
+(310, 10, 'BELUM', '2020-12-01'),
+(311, 11, 'BELUM', '2020-12-01'),
+(312, 12, 'BELUM', '2020-12-01'),
+(313, 13, 'BELUM', '2020-12-01'),
+(314, 14, 'BELUM', '2020-12-01'),
+(315, 15, 'BELUM', '2020-12-01'),
+(316, 16, 'BELUM', '2020-12-01'),
+(317, 17, 'BELUM', '2020-12-01'),
+(318, 18, 'BELUM', '2020-12-01'),
+(319, 19, 'BELUM', '2020-12-01'),
+(320, 20, 'BELUM', '2020-12-01'),
+(321, 1, 'BELUM', '2020-12-02'),
+(322, 2, 'BELUM', '2020-12-02'),
+(323, 3, 'BELUM', '2020-12-02'),
+(324, 4, 'BELUM', '2020-12-02'),
+(325, 5, 'BELUM', '2020-12-02'),
+(326, 6, 'BELUM', '2020-12-02'),
+(327, 7, 'BELUM', '2020-12-02'),
+(328, 8, 'BELUM', '2020-12-02'),
+(329, 9, 'BELUM', '2020-12-02'),
+(330, 10, 'BELUM', '2020-12-02'),
+(331, 11, 'BELUM', '2020-12-02'),
+(332, 12, 'BELUM', '2020-12-02'),
+(333, 13, 'BELUM', '2020-12-02'),
+(334, 14, 'BELUM', '2020-12-02'),
+(335, 15, 'BELUM', '2020-12-02'),
+(336, 16, 'BELUM', '2020-12-02'),
+(337, 17, 'BELUM', '2020-12-02'),
+(338, 18, 'BELUM', '2020-12-02'),
+(339, 19, 'BELUM', '2020-12-02'),
+(340, 20, 'BELUM', '2020-12-02'),
+(341, 1, 'BELUM', '2020-12-03'),
+(342, 2, 'BELUM', '2020-12-03'),
+(343, 3, 'BELUM', '2020-12-03'),
+(344, 4, 'BELUM', '2020-12-03'),
+(345, 5, 'BELUM', '2020-12-03'),
+(346, 6, 'BELUM', '2020-12-03'),
+(347, 7, 'BELUM', '2020-12-03'),
+(348, 8, 'BELUM', '2020-12-03'),
+(349, 9, 'BELUM', '2020-12-03'),
+(350, 10, 'BELUM', '2020-12-03'),
+(351, 11, 'BELUM', '2020-12-03'),
+(352, 12, 'BELUM', '2020-12-03'),
+(353, 13, 'BELUM', '2020-12-03'),
+(354, 14, 'BELUM', '2020-12-03'),
+(355, 15, 'BELUM', '2020-12-03'),
+(356, 16, 'BELUM', '2020-12-03'),
+(357, 17, 'BELUM', '2020-12-03'),
+(358, 18, 'BELUM', '2020-12-03'),
+(359, 19, 'BELUM', '2020-12-03'),
+(360, 20, 'BELUM', '2020-12-03'),
+(361, 1, 'BELUM', '2020-12-04'),
+(362, 2, 'BELUM', '2020-12-04'),
+(363, 3, 'BELUM', '2020-12-04'),
+(364, 4, 'BELUM', '2020-12-04'),
+(365, 5, 'BELUM', '2020-12-04'),
+(366, 6, 'BELUM', '2020-12-04'),
+(367, 7, 'BELUM', '2020-12-04'),
+(368, 8, 'BELUM', '2020-12-04'),
+(369, 9, 'BELUM', '2020-12-04'),
+(370, 10, 'BELUM', '2020-12-04'),
+(371, 11, 'BELUM', '2020-12-04'),
+(372, 12, 'BELUM', '2020-12-04'),
+(373, 13, 'BELUM', '2020-12-04'),
+(374, 14, 'BELUM', '2020-12-04'),
+(375, 15, 'BELUM', '2020-12-04'),
+(376, 16, 'BELUM', '2020-12-04'),
+(377, 17, 'BELUM', '2020-12-04'),
+(378, 18, 'BELUM', '2020-12-04'),
+(379, 19, 'BELUM', '2020-12-04'),
+(380, 20, 'BELUM', '2020-12-04'),
+(381, 1, 'BELUM', '2020-12-05'),
+(382, 2, 'BELUM', '2020-12-05'),
+(383, 3, 'BELUM', '2020-12-05'),
+(384, 4, 'BELUM', '2020-12-05'),
+(385, 5, 'BELUM', '2020-12-05'),
+(386, 6, 'BELUM', '2020-12-05'),
+(387, 7, 'BELUM', '2020-12-05'),
+(388, 8, 'BELUM', '2020-12-05'),
+(389, 9, 'BELUM', '2020-12-05'),
+(390, 10, 'BELUM', '2020-12-05'),
+(391, 11, 'BELUM', '2020-12-05'),
+(392, 12, 'BELUM', '2020-12-05'),
+(393, 13, 'BELUM', '2020-12-05'),
+(394, 14, 'BELUM', '2020-12-05'),
+(395, 15, 'BELUM', '2020-12-05'),
+(396, 16, 'BELUM', '2020-12-05'),
+(397, 17, 'BELUM', '2020-12-05'),
+(398, 18, 'BELUM', '2020-12-05'),
+(399, 19, 'BELUM', '2020-12-05'),
+(400, 20, 'BELUM', '2020-12-05'),
+(401, 1, 'BELUM', '2020-12-06'),
+(402, 2, 'BELUM', '2020-12-06'),
+(403, 3, 'BELUM', '2020-12-06'),
+(404, 4, 'BELUM', '2020-12-06'),
+(405, 5, 'BELUM', '2020-12-06'),
+(406, 6, 'BELUM', '2020-12-06'),
+(407, 7, 'BELUM', '2020-12-06'),
+(408, 8, 'BELUM', '2020-12-06'),
+(409, 9, 'BELUM', '2020-12-06'),
+(410, 10, 'BELUM', '2020-12-06'),
+(411, 11, 'BELUM', '2020-12-06'),
+(412, 12, 'BELUM', '2020-12-06'),
+(413, 13, 'BELUM', '2020-12-06'),
+(414, 14, 'BELUM', '2020-12-06'),
+(415, 15, 'BELUM', '2020-12-06'),
+(416, 16, 'BELUM', '2020-12-06'),
+(417, 17, 'BELUM', '2020-12-06'),
+(418, 18, 'BELUM', '2020-12-06'),
+(419, 19, 'BELUM', '2020-12-06'),
+(420, 20, 'BELUM', '2020-12-06'),
+(421, 1, 'BELUM', '2020-12-07'),
+(422, 2, 'BELUM', '2020-12-07'),
+(423, 3, 'BELUM', '2020-12-07'),
+(424, 4, 'BELUM', '2020-12-07'),
+(425, 5, 'BELUM', '2020-12-07'),
+(426, 6, 'BELUM', '2020-12-07'),
+(427, 7, 'BELUM', '2020-12-07'),
+(428, 8, 'BELUM', '2020-12-07'),
+(429, 9, 'BELUM', '2020-12-07'),
+(430, 10, 'BELUM', '2020-12-07'),
+(431, 11, 'BELUM', '2020-12-07'),
+(432, 12, 'BELUM', '2020-12-07'),
+(433, 13, 'BELUM', '2020-12-07'),
+(434, 14, 'BELUM', '2020-12-07'),
+(435, 15, 'BELUM', '2020-12-07'),
+(436, 16, 'BELUM', '2020-12-07'),
+(437, 17, 'BELUM', '2020-12-07'),
+(438, 18, 'BELUM', '2020-12-07'),
+(439, 19, 'BELUM', '2020-12-07'),
+(440, 20, 'BELUM', '2020-12-07'),
+(441, 1, 'BELUM', '2020-12-08'),
+(442, 2, 'BELUM', '2020-12-08'),
+(443, 3, 'BELUM', '2020-12-08'),
+(444, 4, 'BELUM', '2020-12-08'),
+(445, 5, 'BELUM', '2020-12-08'),
+(446, 6, 'BELUM', '2020-12-08'),
+(447, 7, 'BELUM', '2020-12-08'),
+(448, 8, 'BELUM', '2020-12-08'),
+(449, 9, 'BELUM', '2020-12-08'),
+(450, 10, 'BELUM', '2020-12-08'),
+(451, 11, 'BELUM', '2020-12-08'),
+(452, 12, 'BELUM', '2020-12-08'),
+(453, 13, 'BELUM', '2020-12-08'),
+(454, 14, 'BELUM', '2020-12-08'),
+(455, 15, 'BELUM', '2020-12-08'),
+(456, 16, 'BELUM', '2020-12-08'),
+(457, 17, 'BELUM', '2020-12-08'),
+(458, 18, 'BELUM', '2020-12-08'),
+(459, 19, 'BELUM', '2020-12-08'),
+(460, 20, 'BELUM', '2020-12-08'),
+(461, 1, 'BELUM', '2020-12-09'),
+(462, 2, 'BELUM', '2020-12-09'),
+(463, 3, 'BELUM', '2020-12-09'),
+(464, 4, 'BELUM', '2020-12-09'),
+(465, 5, 'BELUM', '2020-12-09'),
+(466, 6, 'BELUM', '2020-12-09'),
+(467, 7, 'BELUM', '2020-12-09'),
+(468, 8, 'BELUM', '2020-12-09'),
+(469, 9, 'BELUM', '2020-12-09'),
+(470, 10, 'BELUM', '2020-12-09'),
+(471, 11, 'BELUM', '2020-12-09'),
+(472, 12, 'BELUM', '2020-12-09'),
+(473, 13, 'BELUM', '2020-12-09'),
+(474, 14, 'BELUM', '2020-12-09'),
+(475, 15, 'BELUM', '2020-12-09'),
+(476, 16, 'BELUM', '2020-12-09'),
+(477, 17, 'BELUM', '2020-12-09'),
+(478, 18, 'BELUM', '2020-12-09'),
+(479, 19, 'BELUM', '2020-12-09'),
+(480, 20, 'BELUM', '2020-12-09'),
+(481, 1, 'BELUM', '2020-12-10'),
+(482, 2, 'BELUM', '2020-12-10'),
+(483, 3, 'BELUM', '2020-12-10'),
+(484, 4, 'BELUM', '2020-12-10'),
+(485, 5, 'BELUM', '2020-12-10'),
+(486, 6, 'BELUM', '2020-12-10'),
+(487, 7, 'BELUM', '2020-12-10'),
+(488, 8, 'BELUM', '2020-12-10'),
+(489, 9, 'BELUM', '2020-12-10'),
+(490, 10, 'BELUM', '2020-12-10'),
+(491, 11, 'BELUM', '2020-12-10'),
+(492, 12, 'BELUM', '2020-12-10'),
+(493, 13, 'BELUM', '2020-12-10'),
+(494, 14, 'BELUM', '2020-12-10'),
+(495, 15, 'BELUM', '2020-12-10'),
+(496, 16, 'BELUM', '2020-12-10'),
+(497, 17, 'BELUM', '2020-12-10'),
+(498, 18, 'BELUM', '2020-12-10'),
+(499, 19, 'BELUM', '2020-12-10'),
+(500, 20, 'BELUM', '2020-12-10'),
+(501, 1, 'BELUM', '2020-12-11'),
+(502, 2, 'BELUM', '2020-12-11'),
+(503, 3, 'BELUM', '2020-12-11'),
+(504, 4, 'BELUM', '2020-12-11'),
+(505, 5, 'BELUM', '2020-12-11'),
+(506, 6, 'BELUM', '2020-12-11'),
+(507, 7, 'BELUM', '2020-12-11'),
+(508, 8, 'BELUM', '2020-12-11'),
+(509, 9, 'BELUM', '2020-12-11'),
+(510, 10, 'BELUM', '2020-12-11'),
+(511, 11, 'BELUM', '2020-12-11'),
+(512, 12, 'BELUM', '2020-12-11'),
+(513, 13, 'BELUM', '2020-12-11'),
+(514, 14, 'BELUM', '2020-12-11'),
+(515, 15, 'BELUM', '2020-12-11'),
+(516, 16, 'BELUM', '2020-12-11'),
+(517, 17, 'BELUM', '2020-12-11'),
+(518, 18, 'BELUM', '2020-12-11'),
+(519, 19, 'BELUM', '2020-12-11'),
+(520, 20, 'BELUM', '2020-12-11'),
+(521, 1, 'BELUM', '2020-12-12'),
+(522, 2, 'BELUM', '2020-12-12'),
+(523, 3, 'BELUM', '2020-12-12'),
+(524, 4, 'BELUM', '2020-12-12'),
+(525, 5, 'BELUM', '2020-12-12'),
+(526, 6, 'BELUM', '2020-12-12'),
+(527, 7, 'BELUM', '2020-12-12'),
+(528, 8, 'BELUM', '2020-12-12'),
+(529, 9, 'BELUM', '2020-12-12'),
+(530, 10, 'BELUM', '2020-12-12'),
+(531, 11, 'BELUM', '2020-12-12'),
+(532, 12, 'BELUM', '2020-12-12'),
+(533, 13, 'BELUM', '2020-12-12'),
+(534, 14, 'BELUM', '2020-12-12'),
+(535, 15, 'BELUM', '2020-12-12'),
+(536, 16, 'BELUM', '2020-12-12'),
+(537, 17, 'BELUM', '2020-12-12'),
+(538, 18, 'BELUM', '2020-12-12'),
+(539, 19, 'BELUM', '2020-12-12'),
+(540, 20, 'BELUM', '2020-12-12'),
+(541, 1, 'BELUM', '2020-12-13'),
+(542, 2, 'BELUM', '2020-12-13'),
+(543, 3, 'BELUM', '2020-12-13'),
+(544, 4, 'BELUM', '2020-12-13'),
+(545, 5, 'BELUM', '2020-12-13'),
+(546, 6, 'BELUM', '2020-12-13'),
+(547, 7, 'BELUM', '2020-12-13'),
+(548, 8, 'BELUM', '2020-12-13'),
+(549, 9, 'BELUM', '2020-12-13'),
+(550, 10, 'BELUM', '2020-12-13'),
+(551, 11, 'BELUM', '2020-12-13'),
+(552, 12, 'BELUM', '2020-12-13'),
+(553, 13, 'BELUM', '2020-12-13'),
+(554, 14, 'BELUM', '2020-12-13'),
+(555, 15, 'BELUM', '2020-12-13'),
+(556, 16, 'BELUM', '2020-12-13'),
+(557, 17, 'BELUM', '2020-12-13'),
+(558, 18, 'BELUM', '2020-12-13'),
+(559, 19, 'BELUM', '2020-12-13'),
+(560, 20, 'BELUM', '2020-12-13'),
+(561, 1, 'BELUM', '2020-12-14'),
+(562, 2, 'BELUM', '2020-12-14'),
+(563, 3, 'BELUM', '2020-12-14'),
+(564, 4, 'BELUM', '2020-12-14'),
+(565, 5, 'BELUM', '2020-12-14'),
+(566, 6, 'BELUM', '2020-12-14'),
+(567, 7, 'BELUM', '2020-12-14'),
+(568, 8, 'BELUM', '2020-12-14'),
+(569, 9, 'BELUM', '2020-12-14'),
+(570, 10, 'BELUM', '2020-12-14'),
+(571, 11, 'BELUM', '2020-12-14'),
+(572, 12, 'BELUM', '2020-12-14'),
+(573, 13, 'BELUM', '2020-12-14'),
+(574, 14, 'BELUM', '2020-12-14'),
+(575, 15, 'BELUM', '2020-12-14'),
+(576, 16, 'BELUM', '2020-12-14'),
+(577, 17, 'BELUM', '2020-12-14'),
+(578, 18, 'BELUM', '2020-12-14'),
+(579, 19, 'BELUM', '2020-12-14'),
+(580, 20, 'BELUM', '2020-12-14'),
+(581, 1, 'BELUM', '2020-12-15'),
+(582, 2, 'BELUM', '2020-12-15'),
+(583, 3, 'BELUM', '2020-12-15'),
+(584, 4, 'BELUM', '2020-12-15'),
+(585, 5, 'BELUM', '2020-12-15'),
+(586, 6, 'BELUM', '2020-12-15'),
+(587, 7, 'BELUM', '2020-12-15'),
+(588, 8, 'BELUM', '2020-12-15'),
+(589, 9, 'BELUM', '2020-12-15'),
+(590, 10, 'BELUM', '2020-12-15'),
+(591, 11, 'BELUM', '2020-12-15'),
+(592, 12, 'BELUM', '2020-12-15'),
+(593, 13, 'BELUM', '2020-12-15'),
+(594, 14, 'BELUM', '2020-12-15'),
+(595, 15, 'BELUM', '2020-12-15'),
+(596, 16, 'BELUM', '2020-12-15'),
+(597, 17, 'BELUM', '2020-12-15'),
+(598, 18, 'BELUM', '2020-12-15'),
+(599, 19, 'BELUM', '2020-12-15'),
+(600, 20, 'BELUM', '2020-12-15');
 
 -- --------------------------------------------------------
 
@@ -133,18 +711,37 @@ CREATE TABLE `ruang` (
 --
 
 INSERT INTO `ruang` (`id_ruang`, `nama_ruang`, `id_cs`) VALUES
-(1, 'R.123', 1),
-(2, 'R.122', 1),
-(3, 'R.121', 1),
-(4, 'R.143', 2),
-(5, 'R.132', 2),
-(6, 'R.113', 2),
-(7, 'R.183', 1),
-(8, 'R.163', 1),
-(9, 'R.153', 1),
-(10, 'R.129', 3),
-(11, 'R.149', 3),
-(12, 'R.139', 3);
+(1, 'R.101', 1),
+(2, 'R.102', 2),
+(3, 'R.103', 3),
+(4, 'R.104', 4),
+(5, 'R.105', 5),
+(6, 'R.106', 6),
+(7, 'R.107', 7),
+(8, 'R.108', 8),
+(9, 'R.109', 9),
+(10, 'R.110', 10),
+(11, 'R.211', 10),
+(12, 'R.212', 9),
+(13, 'R.213', 8),
+(14, 'R.214', 7),
+(15, 'R.215', 6),
+(16, 'R.216', 5),
+(17, 'R.217', 4),
+(18, 'R.218', 3),
+(19, 'R.219', 2),
+(20, 'R.220', 1);
+
+--
+-- Triggers `ruang`
+--
+DELIMITER $$
+CREATE TRIGGER `add_status_belum` AFTER INSERT ON `ruang` FOR EACH ROW INSERT INTO laporan
+SET id_ruang = NEW.id_ruang,
+status = "BELUM",
+tanggal = NOW()
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -153,7 +750,7 @@ INSERT INTO `ruang` (`id_ruang`, `nama_ruang`, `id_cs`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -164,22 +761,29 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `nama`, `email`, `password`, `level`) VALUES
+INSERT INTO `user` (`id_user`, `nama`, `email`, `password`, `level`) VALUES
 (1, 'Arif Sutowo', 'arif@manajer.com', '69b731ea8f289cf16a192ce78a37b4f0', 'Manajer'),
 (2, 'Doni Kusumah', 'doni@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
 (3, 'Roni Sandria Kalalo', 'roni@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
-(4, 'Devi Desvinta Sari', 'devi@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS');
+(4, 'Devi Desvinta Sari', 'devi@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(5, 'Andi Sudrajat', 'andi@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(6, 'Aksa Yustisio', 'aksa@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(7, 'Elvina Gayatri', 'elvina@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(8, 'Gavin Delano', 'gavin@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(9, 'Zara Ghania', 'zara@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(10, 'Kyla Jovita', 'kyla@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS'),
+(11, 'Keenan Bagaskara', 'keenan@cs.com', '91ec1f9324753048c0096d036a694f86', 'CS');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `bukti_kebersihan`
+-- Indexes for table `bukti`
 --
-ALTER TABLE `bukti_kebersihan`
+ALTER TABLE `bukti`
   ADD PRIMARY KEY (`id_bukti`),
-  ADD KEY `id_ruang` (`id_ruang`);
+  ADD KEY `id_laporan` (`id_laporan`);
 
 --
 -- Indexes for table `cs`
@@ -188,20 +792,11 @@ ALTER TABLE `cs`
   ADD PRIMARY KEY (`id_cs`);
 
 --
--- Indexes for table `media`
+-- Indexes for table `laporan`
 --
-ALTER TABLE `media`
-  ADD PRIMARY KEY (`id_media`),
-  ADD KEY `id_bukti` (`id_bukti`);
-
---
--- Indexes for table `pembersihan`
---
-ALTER TABLE `pembersihan`
-  ADD PRIMARY KEY (`id_pembersihan`),
-  ADD KEY `id_ruang` (`id_ruang`),
-  ADD KEY `id_cs` (`id_cs`),
-  ADD KEY `id_bukti` (`id_bukti`);
+ALTER TABLE `laporan`
+  ADD PRIMARY KEY (`id_laporan`),
+  ADD KEY `id_ruang` (`id_ruang`);
 
 --
 -- Indexes for table `ruang`
@@ -214,71 +809,57 @@ ALTER TABLE `ruang`
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id_user`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `bukti_kebersihan`
+-- AUTO_INCREMENT for table `bukti`
 --
-ALTER TABLE `bukti_kebersihan`
-  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `bukti`
+  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `cs`
 --
 ALTER TABLE `cs`
-  MODIFY `id_cs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT for table `media`
+-- AUTO_INCREMENT for table `laporan`
 --
-ALTER TABLE `media`
-  MODIFY `id_media` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `pembersihan`
---
-ALTER TABLE `pembersihan`
-  MODIFY `id_pembersihan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+ALTER TABLE `laporan`
+  MODIFY `id_laporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=601;
 
 --
 -- AUTO_INCREMENT for table `ruang`
 --
 ALTER TABLE `ruang`
-  MODIFY `id_ruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_ruang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `bukti_kebersihan`
+-- Constraints for table `bukti`
 --
-ALTER TABLE `bukti_kebersihan`
-  ADD CONSTRAINT `bukti_kebersihan_ibfk_1` FOREIGN KEY (`id_ruang`) REFERENCES `ruang` (`id_ruang`);
+ALTER TABLE `bukti`
+  ADD CONSTRAINT `bukti_ibfk_1` FOREIGN KEY (`id_laporan`) REFERENCES `laporan` (`id_laporan`);
 
 --
--- Constraints for table `media`
+-- Constraints for table `laporan`
 --
-ALTER TABLE `media`
-  ADD CONSTRAINT `media_ibfk_1` FOREIGN KEY (`id_bukti`) REFERENCES `bukti_kebersihan` (`id_bukti`);
-
---
--- Constraints for table `pembersihan`
---
-ALTER TABLE `pembersihan`
-  ADD CONSTRAINT `pembersihan_ibfk_1` FOREIGN KEY (`id_ruang`) REFERENCES `ruang` (`id_ruang`),
-  ADD CONSTRAINT `pembersihan_ibfk_2` FOREIGN KEY (`id_cs`) REFERENCES `cs` (`id_cs`),
-  ADD CONSTRAINT `pembersihan_ibfk_3` FOREIGN KEY (`id_bukti`) REFERENCES `bukti_kebersihan` (`id_bukti`);
+ALTER TABLE `laporan`
+  ADD CONSTRAINT `laporan_ibfk_1` FOREIGN KEY (`id_ruang`) REFERENCES `ruang` (`id_ruang`);
 
 --
 -- Constraints for table `ruang`

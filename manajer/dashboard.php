@@ -213,7 +213,11 @@
                         <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                           Sudah Dibersihkan</div>
                         <?php
-                          $query = "SELECT id_laporan, status FROM laporan ORDER BY id_laporan";
+                          date_default_timezone_set('Asia/Jakarta');
+                          $tanggal = date('Y-m-d');
+                          // $tanggal = '2020-12-15';
+
+                          $query = "SELECT id_laporan, status FROM laporan WHERE tanggal = '$tanggal' ORDER BY id_laporan";
                           $result = $db->query($query);
                           if (!$result) {
                             die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
@@ -246,7 +250,11 @@
                         <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
                           Belum Dibersihkan</div>
                         <?php
-                          $query = "SELECT id_laporan, status FROM laporan ORDER BY id_laporan";
+                          date_default_timezone_set('Asia/Jakarta');
+                          $tanggal = date('Y-m-d');
+                          // $tanggal = '2020-12-15';
+
+                          $query = "SELECT id_laporan, status FROM laporan WHERE tanggal = '$tanggal' ORDER BY id_laporan";
                           $result = $db->query($query);
                           if (!$result) {
                             die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
@@ -299,8 +307,8 @@
 
               <?php
                 date_default_timezone_set('Asia/Jakarta');
-                // $tanggal = date('Y-m-d');
-                $tanggal = '2020-12-11';
+                $tanggal = date('Y-m-d');
+                // $tanggal = '2020-12-15';
 
                 $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.id_laporan AS id_laporan, l.status AS status, l.tanggal AS tanggal FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
                 $result = $db->query($query);

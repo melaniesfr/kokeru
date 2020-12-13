@@ -141,10 +141,58 @@
           <!-- Page Heading -->
           <div class="row justify-content-center" style="padding-bottom: 20px;">
             <select name="tanggal" id="tanggal" class="form-control col-4">
-              <option value="">Kamis, 10 November 2020</option>
-              <option value="">Jumat, 11 November 2020</option>
-              <option value="">Sabtu, 12 November 2020</option>
-              <option value="">Minggu, 13 November 2020</option>
+              <?php
+                date_default_timezone_set('Asia/Jakarta');
+                if (date('N') == 1) {
+                  $day = "Senin";
+                } else if (date('N') == 2) {
+                  $day = "Selasa";
+                } else if (date('N') == 3) {
+                  $day = "Rabu";
+                } else if (date('N') == 4) {
+                  $day = "Kamis";
+                } else if (date('N') == 5) {
+                  $day = "Jumat";
+                } else if (date('N') == 6) {
+                  $day = "Sabtu";
+                } else if (date('N') == 7) {
+                  $day = "Minggu";
+                }
+                $tanggal = date('d F Y');
+
+                echo '<option value="">'.$day.', '.$tanggal.'</option>';
+              ?>
+
+              <option value="">Senin, 16 November 2020</option>
+              <option value="">Selasa, 17 November 2020</option>
+              <option value="">Rabu, 18 November 2020</option>
+              <option value="">Kamis, 19 November 2020</option>
+              <option value="">Jumat, 20 November 2020</option>
+              <option value="">Sabtu, 21 November 2020</option>
+              <option value="">Minggu, 22 November 2020</option>
+              <option value="">Senin, 23 November 2020</option>
+              <option value="">Selasa, 24 November 2020</option>
+              <option value="">Rabu, 25 November 2020</option>
+              <option value="">Kamis, 26 November 2020</option>
+              <option value="">Jumat, 27 November 2020</option>
+              <option value="">Sabtu, 28 November 2020</option>
+              <option value="">Minggu, 29 November 2020</option>
+              <option value="">Senin, 30 November 2020</option>
+              <option value="">Selasa, 1 December 2020</option>
+              <option value="">Rabu, 2 December 2020</option>
+              <option value="">Kamis, 3 December 2020</option>
+              <option value="">Jumat, 4 December 2020</option>
+              <option value="">Sabtu, 5 December 2020</option>
+              <option value="">Minggu, 6 December 2020</option>
+              <option value="">Senin, 7 December 2020</option>
+              <option value="">Selasa, 8 December 2020</option>
+              <option value="">Rabu, 9 December 2020</option>
+              <option value="">Kamis, 10 December 2020</option>
+              <option value="">Jumat, 11 December 2020</option>
+              <option value="">Sabtu, 12 December 2020</option>
+              <option value="">Minggu, 13 December 2020</option>
+              <option value="">Senin, 14 December 2020</option>
+              <option value="">Selasa, 15 December 2020</option>
             </select>
 
             <select name="status" id="status" class="form-control col-2" style="margin-left: 20px;">
@@ -160,7 +208,7 @@
             <br>
             <div class="col-12">
                 <h3 class="row justify-content-center">Laporan Harian Kebersihan dan Kerapian Ruangan Gedung Bersama Maju</h3>
-                <h3 class="row justify-content-center">Hari Kamis Tanggal 10 November 2020</h3>
+                <h3 class="row justify-content-center">Hari Senin Tanggal 12 November 2020</h3>
                 <?php
                   date_default_timezone_set('Asia/Jakarta');
                   echo '<p class="row justify-content-center">&lt;&lt;Tanggal Cetak '.date('d F Y').' Jam '.date('H:i').' WIB&gt;&gt;</p>';
@@ -182,8 +230,8 @@
                   <tbody class="text-center">
                     <?php
                       date_default_timezone_set('Asia/Jakarta');
-                      // $tanggal = date('Y-m-d');
-                      $tanggal = '2020-12-11';
+                      $tanggal = date('Y-m-d');
+                      // $tanggal = '2020-12-15';
 
                       $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
                       $result = $db->query($query);
