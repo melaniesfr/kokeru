@@ -118,180 +118,147 @@
         <div class="container-fluid">
           <!-- Page Heading -->
           <div class="container">
+          <!-- Content Row -->
+            <div class="row justify-content-center">
+            <!-- Sudah Dibersihkan -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          Sudah Dibersihkan</div>
+                        <?php
+                          date_default_timezone_set('Asia/Jakarta');
+                          $tanggal = date('Y-m-d');
+                          // $tanggal = '2020-12-15';
+
+                          $query = "SELECT cs.email AS email, l.id_laporan, l.status  FROM laporan l JOIN ruang r ON r.id_ruang = l.id_ruang JOIN cs ON cs.id_cs = r.id_cs WHERE tanggal = '$tanggal' AND email = '$user'";
+                          $result = $db->query($query);
+                          if (!$result) {
+                            die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                          }
+
+                          $i = 0;
+                          while ($row = $result->fetch_object()) {
+                            if ($row->status == "SUDAH") {
+                              $i++;
+                            }
+                          }
+
+                          echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$i.'</div>';
+                        ?>
+                      </div>
+                      <div class="col-auto">
+                        <i class="far fa-thumbs-up fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Belum Dibersihkan -->
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-danger shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                          Belum Dibersihkan</div>
+                        <?php
+                          date_default_timezone_set('Asia/Jakarta');
+                          $tanggal = date('Y-m-d');
+                          // $tanggal = '2020-12-15';
+
+                          $query = "SELECT cs.email AS email, l.id_laporan, l.status  FROM laporan l JOIN ruang r ON r.id_ruang = l.id_ruang JOIN cs ON cs.id_cs = r.id_cs WHERE tanggal = '$tanggal' AND email = '$user'";
+                          $result = $db->query($query);
+                          if (!$result) {
+                            die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                          }
+
+                          $i = 0;
+                          while ($row = $result->fetch_object()) {
+                            if ($row->status == "BELUM") {
+                              $i++;
+                            }
+                          }
+
+                          echo '<div class="h5 mb-0 font-weight-bold text-gray-800">'.$i.'</div>';
+                        ?>
+                      </div>
+                      <div class="col-auto">
+                        <i class="fas fa-ban fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <br>
 
-            <!-- Kotak Baris 1 -->
-            <div class="row">
+            <div class="row justify-content-center">
               <div class="col-12">
-                <h3 class="row justify-content-center">Monitoring Kebersihan dan Kerapian Ruang</h3>
-                <h3 class="row justify-content-center">Gedung Bersama Maju</h3>
-                <h4 class="row justify-content-center">Hari Kamis Tanggal 12 November 2020 Jam 07:11 WIB</h4>
+                <?php
+                  date_default_timezone_set('Asia/Jakarta');
+                  if (date('N') == 1) {
+                    $day = "Senin";
+                  } else if (date('N') == 2) {
+                    $day = "Selasa";
+                  } else if (date('N') == 3) {
+                    $day = "Rabu";
+                  } else if (date('N') == 4) {
+                    $day = "Kamis";
+                  } else if (date('N') == 5) {
+                    $day = "Jumat";
+                  } else if (date('N') == 6) {
+                    $day = "Sabtu";
+                  } else if (date('N') == 7) {
+                    $day = "Minggu";
+                  }
+
+                  echo '<h4 class="row justify-content-center">Hari '.$day.' Tanggal '.date('d F Y').' Jam '.date('H:i:s').' WIB</h4>';
+                ?>
                 <br>
               </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.123</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.143</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.183</h3>
-                    <p class="row justify-content-center">SUDAH</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.129</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Devi Deswinta Sari</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <!-- Kotak Baris 2 -->
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.122</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.132</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.163</h3>
-                    <p class="row justify-content-center">SUDAH</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.149</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Devi Deswinta Sari</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <?php
+                date_default_timezone_set('Asia/Jakarta');
+                $tanggal = date('Y-m-d');
+                // $tanggal = '2020-12-15';
 
-            <!-- Kotak baris 3 -->
-            <div class="row">
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.121</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-warning text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.113</h3>
-                    <p class="row justify-content-center">BELUM</p>
-                    <p class="row justify-content-center">Roni Sandria Kalalo</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.153</h3>
-                    <p class="row justify-content-center">SUDAH</p>
-                    <p class="row justify-content-center">Doni Kusumah</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-3 col-md-6">
-                <div class="card bg-success text-white mb-4">
-                  <div class="card-body">
-                    <h3 class="row justify-content-center">R.139</h3>
-                    <p class="row justify-content-center">SUDAH</p>
-                    <p class="row justify-content-center">Devi Deswinta Sari</p>
-                  </div>
-                  <div class="card-footer d-flex align-items-center justify-content-between">
-                    <a class="small text-blue stretched-link" href="#">View Details</a>
-                    <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                  </div>
-                </div>
-              </div>
+                $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.id_laporan AS id_laporan, l.status AS status, l.tanggal AS tanggal FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' AND l.id_ruang = r.id_ruang AND email = '$user' ORDER BY r.id_ruang";
+                $result = $db->query($query);
+
+                if (!$result) {
+                  die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+                } else {
+                  $i = 0;
+                  while ($row = $result->fetch_object()) {
+                    echo '<div class="col-xl-3 col-md-6">';
+                    if ($row->status=="SUDAH") {
+                      echo '  <div class="card bg-success text-white mb-4">';
+                    } else {
+                      echo '  <div class="card bg-warning text-white mb-4">';
+                    }
+
+                    echo '    <div class="card-body">';
+                    echo '      <h3 class="row justify-content-center">'.$row->nama_ruang.'</h3>';
+                    if ($row->status == "SUDAH") {
+                      echo '<p class="row justify-content-center"><span class="badge bg-warning">'.$row->status.'</span></p>';
+                    } else {
+                      echo '<p class="row justify-content-center"><span class="badge bg-danger">'.$row->status.'</span></p>';
+                    }
+                    echo '      <p class="row justify-content-center">'.$row->nama_cs.'</p>';
+                    echo '    </div>';
+                    echo '    <div class="card-footer d-flex align-items-center justify-content-between">';
+                    echo '      <a class="small text-blue stretched-link" href="bukti.php?id='.$row->id_laporan.'">View Details</a>';
+                    echo '      <div class="small text-dark"><i class="fas fa-angle-right"></i></div>';
+                    echo '    </div>';
+                    echo '  </div>';
+                    echo '</div>';
+                  }
+                }
+              ?>
             </div>
           </div>
         </div>

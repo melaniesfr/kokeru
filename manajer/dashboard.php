@@ -300,6 +300,7 @@
                   } else if (date('N') == 7) {
                     $day = "Minggu";
                   }
+
                   echo '<h4 class="row justify-content-center">Hari '.$day.' Tanggal '.date('d F Y').' Jam '.date('H:i:s').' WIB</h4>';
                 ?>
                 <br>
@@ -325,11 +326,16 @@
                   }
                   echo '    <div class="card-body">';
                   echo '      <h3 class="row justify-content-center">'.$row->nama_ruang.'</h3>';
-                  echo '      <p class="row justify-content-center">'.$row->status.'</p>';
+                  if ($row->status == "SUDAH") {
+                    echo '<p class="row justify-content-center"><span class="badge bg-warning">'.$row->status.'</span></p>';
+                  } else {
+                    echo '<p class="row justify-content-center"><span class="badge bg-danger">'.$row->status.'</span></p>';
+                  }
                   echo '      <p class="row justify-content-center">'.$row->nama_cs.'</p>';
                   echo '    </div>';
                   echo '    <div class="card-footer d-flex align-items-center justify-content-between">';
                   echo '      <a class="small text-blue stretched-link" href="bukti.php?id='.$row->id_laporan.'">View Details</a>';
+                  echo '      <div class="small text-dark"><i class="fas fa-angle-right"></i></div>';
                   echo '    </div>';
                   echo '  </div>';
                   echo '</div>';
