@@ -130,8 +130,8 @@
                           Sudah Dibersihkan</div>
                         <?php
                           date_default_timezone_set('Asia/Jakarta');
-                          $tanggal = date('Y-m-d');
-                          // $tanggal = '2020-12-15';
+                          // $tanggal = date('Y-m-d');
+                          $tanggal = '2020-12-15';
 
                           $query = "SELECT cs.email AS email, l.id_laporan, l.status  FROM laporan l JOIN ruang r ON r.id_ruang = l.id_ruang JOIN cs ON cs.id_cs = r.id_cs WHERE tanggal = '$tanggal' AND email = '$user'";
                           $result = $db->query($query);
@@ -167,8 +167,8 @@
                           Belum Dibersihkan</div>
                         <?php
                           date_default_timezone_set('Asia/Jakarta');
-                          $tanggal = date('Y-m-d');
-                          // $tanggal = '2020-12-15';
+                          // $tanggal = date('Y-m-d');
+                          $tanggal = '2020-12-15';
 
                           $query = "SELECT cs.email AS email, l.id_laporan, l.status  FROM laporan l JOIN ruang r ON r.id_ruang = l.id_ruang JOIN cs ON cs.id_cs = r.id_cs WHERE tanggal = '$tanggal' AND email = '$user'";
                           $result = $db->query($query);
@@ -223,8 +223,8 @@
 
               <?php
                 date_default_timezone_set('Asia/Jakarta');
-                $tanggal = date('Y-m-d');
-                // $tanggal = '2020-12-15';
+                // $tanggal = date('Y-m-d');
+                $tanggal = '2020-12-15';
 
                 $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.id_laporan AS id_laporan, l.status AS status, l.tanggal AS tanggal FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' AND l.id_ruang = r.id_ruang AND email = '$user' ORDER BY r.id_ruang";
                 $result = $db->query($query);

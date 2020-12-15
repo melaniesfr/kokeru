@@ -1,5 +1,107 @@
 <?php include 'header.php'; ?>
 
+<?php
+  require_once('../lib/db_login.php');
+  // $id = $_GET['id'];
+
+  // if (isset($_POST["submit"])) {
+  //   if ($_SESSION['email']) {
+  //     $user = $_SESSION['email'];
+  //     $query = "SELECT l.id_laporan AS id_laporan FROM cs JOIN ruang r ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang JOIN bukti b ON b.id_laporan = l.id_laporan WHERE cs.email = '$user'";
+  //   }
+  //   $result = $db->query($query);
+  //   if (!$result) {
+  //     die ("Could not query the database: <br>".$db->error);
+  //   }
+
+  //   $valid = TRUE;
+  //   while ($row = $result->fetch_object()) {
+  //     $id_laporan = $row->id_laporan;
+
+  //     $gambar = $_FILES['gambar']['name'];
+  //     if ($gambar == '') {
+  //       $error_gambar = "File is required";
+  //       $valid = FALSE;
+  //     }
+  //   }
+
+  //   move_uploaded_file($_FILES['gambar']['tmp_name'], "../img/$gambar");
+
+  //   date_default_timezone_set('Asia/Jakarta');
+  //   $tanggal = date('Y-m-d');
+
+  //   if ($valid) {
+  //     $query1 = "INSERT INTO bukti (id_laporan, nama_file, tanggal) VALUES ($id_laporan', '$gambar', '$tanggal')";
+  //     $result1 = $db->query($query1);
+
+  //     if (!$result1) {
+  //       die('Could not query the database: <br>'.$db->error.'<br>Query: '.$query1);
+  //     } else {
+  //       $db->close();
+  //     }
+  //   }
+  // }
+
+  if (isset($_POST['submit'])) {
+    $ekstensi_diperbolehkan = array('png', 'jpg', 'mp4');
+    $file = $_FILES['file']['name'];
+    $x = explode('.', $file);
+    $ekstensi = strtolower(end($x));
+    $ukuran	= $_FILES['file']['size'];
+    $file_tmp = $_FILES['file']['tmp_name'];
+
+    if ($file == '') {
+      $error_file = "File is required";
+    }
+
+    if (in_array($ekstensi, $ekstensi_diperbolehkan) === true) {
+      if ($ukuran < 1044070) {
+        move_uploaded_file($file_tmp, '../img/'.$file);
+
+        date_default_timezone_set('Asia/Jakarta');
+        // $tanggal = date('Y-m-d');
+        $tanggal = date('2020-12-15');
+
+        $query = "INSERT INTO bukti (id_laporan, nama_file, tanggal) VALUES (581, '$file', '$tanggal')";
+        $result = $db->query($query);
+
+        if (!$result) {
+          die('Could not query the database: <br>'.$db->error.'<br>Query: '.$query);
+        } else {
+          // $db->close();
+          header('dashboard.php');
+        }
+      }
+    }
+  }
+?>
+
+<style>
+  .zoomeffect {
+    width: 100%;
+    height: 100%;
+    text-align :center;
+    overflow: hidden;
+    position: relative;
+    cursor: default;
+  }
+
+  .zoomeffect img {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    -webkit-transition: all .4s linear;
+    transition: all .4s linear;
+    width: 100%;
+  }
+
+  .zoomeffect:hover img {
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    transform: scale(1.2);
+  }
+</style>
+
     <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
         <a class="nav-link" href="dashboard.php">
@@ -57,6 +159,7 @@
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
+
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
             <li class="nav-item dropdown no-arrow d-sm-none">
               <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -164,7 +267,60 @@
               </div>
             </div>
           </div>
-        </div>
+
+          <!-- Upload -->
+          <form method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="file">File</label>
+
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" id="file" name="file">
+                <label class="custom-file-label" for="file" id="nama_file" nama="nama_file">Choose file to upload...</label>
+              </div>
+
+              <div class="error" style="color: red; font-size: 0.75em; padding-left: 10px; padding-top: 10px;"><?php if (isset($error_file)) echo $error_file; ?></div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" name="submit" value="submit">Upload</button>
+          </form>
+
+          <br>
+
+          <table class="zoomeffect">
+            <?php
+              $server = "localhost";
+              $user = "root";
+              $pass = "";
+              $database = "db_kokeru";
+
+              $koneksi = mysqli_connect($server, $user, $pass, $database) or die(mysqli_error($koneksi));
+
+              $tampil = mysqli_query($koneksi, "SELECT * FROM bukti WHERE id_laporan = 581");
+              while ($data = mysqli_fetch_array($tampil)):
+            ?>
+
+            <tr>
+              <center>
+                <td>
+                  <?php
+                    $ekstensi_foto = array('png', 'jpg');
+                    $ekstensi_video = array('mp4');
+                    $file = $data['nama_file'];
+                    $x = explode('.', $file);
+                    $ekstensi = strtolower(end($x)); ?>
+
+                    <?php if (in_array($ekstensi, $ekstensi_foto) === true) { ?>
+                      <img src="<?php echo "../img/".$data['nama_file']?>"style="width: 200px;">
+                    <?php } else if (in_array($ekstensi, $ekstensi_video) === true) { ?>
+                      <video width="200px" height="200px" controls>
+                        <source src="<?php echo "../img/".$data['nama_file']?>" type="video/mp4">
+                      </video>';
+                    <?php } ?>
+                </td>
+              </center>
+            </tr>
+            <?php endwhile;?>
+          </table>
         <!-- /.container-fluid -->
       </div>
       <!-- End of Main Content -->

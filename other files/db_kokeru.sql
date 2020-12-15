@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2020 at 06:16 AM
+-- Generation Time: Dec 15, 2020 at 06:03 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.3.11
 
@@ -34,6 +34,14 @@ CREATE TABLE `bukti` (
   `nama_file` varchar(100) NOT NULL,
   `tanggal` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bukti`
+--
+
+INSERT INTO `bukti` (`id_bukti`, `id_laporan`, `nama_file`, `tanggal`) VALUES
+(1, 581, 'ruangan.jpg', '2020-12-15'),
+(2, 581, 'video.mp4', '2020-12-15');
 
 --
 -- Triggers `bukti`
@@ -673,7 +681,7 @@ INSERT INTO `laporan` (`id_laporan`, `id_ruang`, `status`, `tanggal`) VALUES
 (578, 18, 'BELUM', '2020-12-14'),
 (579, 19, 'BELUM', '2020-12-14'),
 (580, 20, 'BELUM', '2020-12-14'),
-(581, 1, 'BELUM', '2020-12-15'),
+(581, 1, 'SUDAH', '2020-12-15'),
 (582, 2, 'BELUM', '2020-12-15'),
 (583, 3, 'BELUM', '2020-12-15'),
 (584, 4, 'BELUM', '2020-12-15'),
@@ -692,7 +700,47 @@ INSERT INTO `laporan` (`id_laporan`, `id_ruang`, `status`, `tanggal`) VALUES
 (597, 17, 'BELUM', '2020-12-15'),
 (598, 18, 'BELUM', '2020-12-15'),
 (599, 19, 'BELUM', '2020-12-15'),
-(600, 20, 'BELUM', '2020-12-15');
+(600, 20, 'BELUM', '2020-12-15'),
+(601, 1, 'BELUM', '2020-12-16'),
+(602, 2, 'BELUM', '2020-12-16'),
+(603, 3, 'BELUM', '2020-12-16'),
+(604, 4, 'BELUM', '2020-12-16'),
+(605, 5, 'BELUM', '2020-12-16'),
+(606, 6, 'BELUM', '2020-12-16'),
+(607, 7, 'BELUM', '2020-12-16'),
+(608, 8, 'BELUM', '2020-12-16'),
+(609, 9, 'BELUM', '2020-12-16'),
+(610, 10, 'BELUM', '2020-12-16'),
+(611, 11, 'BELUM', '2020-12-16'),
+(612, 12, 'BELUM', '2020-12-16'),
+(613, 13, 'BELUM', '2020-12-16'),
+(614, 14, 'BELUM', '2020-12-16'),
+(615, 15, 'BELUM', '2020-12-16'),
+(616, 16, 'BELUM', '2020-12-16'),
+(617, 17, 'BELUM', '2020-12-16'),
+(618, 18, 'BELUM', '2020-12-16'),
+(619, 19, 'BELUM', '2020-12-16'),
+(620, 20, 'BELUM', '2020-12-16'),
+(621, 1, 'BELUM', '2020-12-17'),
+(622, 2, 'BELUM', '2020-12-17'),
+(623, 3, 'BELUM', '2020-12-17'),
+(624, 4, 'BELUM', '2020-12-17'),
+(625, 5, 'BELUM', '2020-12-17'),
+(626, 6, 'BELUM', '2020-12-17'),
+(627, 7, 'BELUM', '2020-12-17'),
+(628, 8, 'BELUM', '2020-12-17'),
+(629, 9, 'BELUM', '2020-12-17'),
+(630, 10, 'BELUM', '2020-12-17'),
+(631, 11, 'BELUM', '2020-12-17'),
+(632, 12, 'BELUM', '2020-12-17'),
+(633, 13, 'BELUM', '2020-12-17'),
+(634, 14, 'BELUM', '2020-12-17'),
+(635, 15, 'BELUM', '2020-12-17'),
+(636, 16, 'BELUM', '2020-12-17'),
+(637, 17, 'BELUM', '2020-12-17'),
+(638, 18, 'BELUM', '2020-12-17'),
+(639, 19, 'BELUM', '2020-12-17'),
+(640, 20, 'BELUM', '2020-12-17');
 
 -- --------------------------------------------------------
 
@@ -819,7 +867,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bukti`
 --
 ALTER TABLE `bukti`
-  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_bukti` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `cs`
@@ -831,7 +879,7 @@ ALTER TABLE `cs`
 -- AUTO_INCREMENT for table `laporan`
 --
 ALTER TABLE `laporan`
-  MODIFY `id_laporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=601;
+  MODIFY `id_laporan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=641;
 
 --
 -- AUTO_INCREMENT for table `ruang`
