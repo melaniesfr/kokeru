@@ -55,10 +55,11 @@
         <!-- Kotak Baris 1 -->
         <div class="row">
           <div class="col-12">
-            <h3 class="row justify-content-center">Monitoring Kebersihan dan Kerapian Ruang</h3>
-            <h3 class="row justify-content-center">Gedung Bersama Maju</h3>
+            <h4 class="row justify-content-center">Monitoring Kebersihan dan Kerapian Ruang</h4>
+            <h4 class="row justify-content-center">Gedung Bersama Maju</h4>
             <?php
               date_default_timezone_set('Asia/Jakarta');
+
               if (date('N') == 1) {
                 $day = "Senin";
               } else if (date('N') == 2) {
@@ -74,43 +75,48 @@
               } else if (date('N') == 7) {
                 $day = "Minggu";
               }
-              echo '<h4 class="row justify-content-center">Hari '.$day.' Tanggal '.date('d F Y').' Jam '.date('H:i:s').' WIB</h4>';
+              echo '<h5 class="row justify-content-center">Hari '.$day.' Tanggal '.date('d F Y').' Jam '.date('H:i:s').' WIB</h5>';
             ?>
             <br>
           </div>
-
-          <?php
-            date_default_timezone_set('Asia/Jakarta');
-            $tanggal = date('Y-m-d');
-            // $tanggal = '2020-12-15';
-
-            $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.id_laporan AS id_laporan, l.status AS status, l.tanggal AS tanggal FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
-            $result = $db->query($query);
-            if (!$result) {
-              die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
-            }
-
-            while ($row = $result->fetch_object()) {
-              echo '<div class="col-xl-3 col-md-6">';
-              if ($row->status == "SUDAH") {
-                echo '  <div class="card bg-success text-white mb-4">';
-              } else {
-                echo '  <div class="card bg-warning text-white mb-4">';
-              }
-              echo '    <div class="card-body">';
-              echo '      <h3 class="row justify-content-center">'.$row->nama_ruang.'</h3>';
-              echo '      <p class="row justify-content-center">'.$row->status.'</p>';
-              echo '      <p class="row justify-content-center">'.$row->nama_cs.'</p>';
-              echo '    </div>';
-              echo '    <div class="card-footer d-flex align-items-center justify-content-between">';
-              echo '      <a class="small text-white stretched-link" href="#">View Details</a>';
-              echo '      <div class="small text-white"><i class="fas fa-angle-right"></i></div>';
-              echo '    </div>';
-              echo '  </div>';
-              echo '</div>';
-            }
-          ?>
         </div>
+
+        <marquee behavior="" direction="up" height="308"  onmouseover="this.stop();" onmouseout="this.start();">
+          <div class="row">
+            <?php
+              date_default_timezone_set('Asia/Jakarta');
+              // $tanggal = date('Y-m-d');
+              $tanggal = '2020-12-16';
+
+              $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.id_laporan AS id_laporan, l.status AS status, l.tanggal AS tanggal FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
+              $result = $db->query($query);
+              if (!$result) {
+                die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
+              }
+              ?>
+              <?php
+              while ($row = $result->fetch_object()) {
+                echo '<div class="col-xl-3 col-md-6">';
+                if ($row->status == "SUDAH") {
+                  echo '  <div class="card bg-success text-white mb-4">';
+                } else {
+                  echo '  <div class="card bg-warning text-white mb-4">';
+                }
+                echo '    <div class="card-body">';
+                echo '      <h3 class="row justify-content-center">'.$row->nama_ruang.'</h3>';
+                echo '      <p class="row justify-content-center">'.$row->status.'</p>';
+                echo '      <p class="row justify-content-center">'.$row->nama_cs.'</p>';
+                echo '    </div>';
+                echo '    <div class="card-footer d-flex align-items-center justify-content-between">';
+                echo '      <a class="small text-white stretched-link" href="#">View Details</a>';
+                echo '      <div class="small text-white"><i class="fas fa-angle-right"></i></div>';
+                echo '    </div>';
+                echo '  </div>';
+                echo '</div>';
+              }
+            ?>
+          </div>
+        </marquee>
       </div>
     </section><!-- End Monitoring Section -->
   </main><!-- End #main -->

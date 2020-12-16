@@ -141,8 +141,12 @@
                         $user = $_SESSION['email'];
                       }
 
+                      date_default_timezone_set('Asia/Jakarta');
+                      // $tanggal = date('Y-m-d');
+                      $tanggal = '2020-12-16';
+
                       // Execute the query
-                      $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs FROM ruang r JOIN cs ON r.id_cs = cs.id_cs WHERE email = '".$user."' ORDER BY id_ruang";
+                      $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status, l.tanggal AS tanggal FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE cs.email = '".$user."' AND l.tanggal = '$tanggal' ORDER BY r.id_ruang";
                       $result = $db->query($query);
                       if (!$result) {
                         die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
@@ -155,10 +159,10 @@
                         echo '<td class="text-center">'.$i.'</td>';
                         echo '<td class="text-center">'.$row->nama_ruang.'</td>';
                         echo '<td>'.$row->nama_cs.'</td>';
-                        if (($row->nama_ruang == 'R.183') || ($row->nama_ruang == 'R.163') || ($row->nama_ruang == 'R.153') || ($row->nama_ruang == 'R.139')) {
-                          echo '<td class="text-center">SUDAH</td>';
+                        if ($row->status == 'SUDAH') {
+                          echo '<td class="text-center text-white"><span class="badge rounded-pill bg-success">SUDAH</span></td>';
                         } else {
-                          echo '<td class="text-center">BELUM</td>';
+                          echo '<td class="text-center text-white"><span class="badge rounded-pill bg-danger">BELUM</span></td>';
                         }
                         echo '</tr>';
 

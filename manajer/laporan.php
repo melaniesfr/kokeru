@@ -148,7 +148,7 @@
               <option value="sudah">SUDAH</option>
             </select>
 
-            <a href="#" class="d-none d-md-inline-block btn btn-md btn-info shadow-md" style="margin-left: 20px;">Tampil</a>
+            <a href="laporan.php" class="d-none d-md-inline-block btn btn-md btn-info shadow-md" style="margin-left: 20px;">Tampil</a>
             <a target="_blank" href="pdf.php" class="d-none d-md-inline-block btn btn-md btn-danger shadow-md" style="margin-left: 20px;">PDF</a>
             <a target="_blank" href="excel.php" class="d-none d-md-inline-block btn btn-md btn-success shadow-md" style="margin-left: 20px;">Excel</a>
           </div>
@@ -177,6 +177,7 @@
                   }
 
                   echo '<h3 class="row justify-content-center">Hari '.$day.' Tanggal '.date('d F Y').'</h3>';
+                  // echo '<h3 class="row justify-content-center">Hari Selasa Tanggal 1 '.date('F Y').'</h3>';
                   echo '<p class="row justify-content-center">&lt;&lt;Tanggal Cetak '.date('d F Y').' Jam '.date('H:i').' WIB&gt;&gt;</p>';
                 ?>
             </div>
@@ -196,10 +197,14 @@
                   <tbody class="text-center">
                     <?php
                       date_default_timezone_set('Asia/Jakarta');
-                      $tanggal = date('Y-m-d');
-                      // $tanggal = '2020-12-15';
+                      // $tanggal = date('Y-m-d');
+                      $tanggal = '2020-12-16';
+                      // $tanggal = '2020-12-01';
 
                       $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
+
+                      // $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' AND l.status = 'SUDAH' ORDER BY r.id_ruang";
+
                       $result = $db->query($query);
                       if (!$result) {
                         die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);

@@ -2,45 +2,6 @@
 
 <?php
   require_once('../lib/db_login.php');
-  // $id = $_GET['id'];
-
-  // if (isset($_POST["submit"])) {
-  //   if ($_SESSION['email']) {
-  //     $user = $_SESSION['email'];
-  //     $query = "SELECT l.id_laporan AS id_laporan FROM cs JOIN ruang r ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang JOIN bukti b ON b.id_laporan = l.id_laporan WHERE cs.email = '$user'";
-  //   }
-  //   $result = $db->query($query);
-  //   if (!$result) {
-  //     die ("Could not query the database: <br>".$db->error);
-  //   }
-
-  //   $valid = TRUE;
-  //   while ($row = $result->fetch_object()) {
-  //     $id_laporan = $row->id_laporan;
-
-  //     $gambar = $_FILES['gambar']['name'];
-  //     if ($gambar == '') {
-  //       $error_gambar = "File is required";
-  //       $valid = FALSE;
-  //     }
-  //   }
-
-  //   move_uploaded_file($_FILES['gambar']['tmp_name'], "../img/$gambar");
-
-  //   date_default_timezone_set('Asia/Jakarta');
-  //   $tanggal = date('Y-m-d');
-
-  //   if ($valid) {
-  //     $query1 = "INSERT INTO bukti (id_laporan, nama_file, tanggal) VALUES ($id_laporan', '$gambar', '$tanggal')";
-  //     $result1 = $db->query($query1);
-
-  //     if (!$result1) {
-  //       die('Could not query the database: <br>'.$db->error.'<br>Query: '.$query1);
-  //     } else {
-  //       $db->close();
-  //     }
-  //   }
-  // }
 
   if (isset($_POST['submit'])) {
     $ekstensi_diperbolehkan = array('png', 'jpg', 'mp4');
@@ -60,9 +21,9 @@
 
         date_default_timezone_set('Asia/Jakarta');
         // $tanggal = date('Y-m-d');
-        $tanggal = date('2020-12-15');
+        $tanggal = date('2020-12-16');
 
-        $query = "INSERT INTO bukti (id_laporan, nama_file, tanggal) VALUES (581, '$file', '$tanggal')";
+        $query = "INSERT INTO bukti (id_laporan, nama_file, tanggal) VALUES (601, '$file', '$tanggal')";
         $result = $db->query($query);
 
         if (!$result) {
@@ -78,8 +39,8 @@
 
 <style>
   .zoomeffect {
-    width: 100%;
-    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
     text-align :center;
     overflow: hidden;
     position: relative;
@@ -228,45 +189,6 @@
           </a>
 
           <br><br>
-          <div class="card shadow mb-4 bg-primary">
-            <div class="card-header bg-warning text-center" style="margin-bottom: 20px; font-size: 20px; color: white; font-weight: bold;">Bukti Kebersihan dan Kerapian</div>
-
-            <div class="row justify-content-center">
-              <div class="col-sm-3">
-                <div class="card bg-white text-white mb-4">
-                  <div class="card-body" style="weight: 200px; height: 200px;">
-                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-sm-3">
-                <div class="card bg-white text-white mb-4">
-                  <div class="card-body" style="weight: 200px; height: 200px;">
-                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="row justify-content-center">
-              <div class="col-sm-3">
-                <div class="card bg-white text-white mb-4">
-                  <div class="card-body" style="weight: 200px; height: 200px;">
-                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-sm-3">
-                <div class="card bg-white text-white mb-4">
-                  <div class="card-body" style="weight: 200px; height: 200px;">
-                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <!-- Upload -->
           <form method="POST" autocomplete="on" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" enctype="multipart/form-data">
@@ -286,8 +208,38 @@
 
           <br>
 
-          <table class="zoomeffect">
+          <div class="card shadow mb-4 bg-primary">
+            <div class="card-header bg-warning text-center" style="margin-bottom: 20px; font-size: 20px; color: white; font-weight: bold;">Bukti Kebersihan dan Kerapian</div>
+
             <?php
+              require_once('../lib/db_login.php');
+
+              $id = $_GET['id'];
+
+              $query = "SELECT * FROM laporan WHERE id_laporan = '$id'";
+              $result = $db->query($query);
+              if (!$result) {
+                die ("Could not query the database: <br />".$db->error);
+              }
+
+              while ($row = $result->fetch_object()) {
+                if ($row->status == "BELUM") { ?>
+                  <div class="row justify-content-center">
+                    <div class="col-sm-3">
+                      <div class="card bg-white text-white mb-4">
+                        <div class="card-body" style="weight: 200px; height: 200px; display: flex; align-items: center; justify-content: center;">
+                          <h3 class="row justify-content-center text-center" style="color: black;">Belum <br> ada Bukti</h3>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                <?php }
+              }
+            ?>
+
+            <?php
+              $id = $_GET['id'];
+
               $server = "localhost";
               $user = "root";
               $pass = "";
@@ -295,32 +247,39 @@
 
               $koneksi = mysqli_connect($server, $user, $pass, $database) or die(mysqli_error($koneksi));
 
-              $tampil = mysqli_query($koneksi, "SELECT * FROM bukti WHERE id_laporan = 581");
+              $tampil = mysqli_query($koneksi, "SELECT * FROM bukti WHERE id_laporan = '$id'");
               while ($data = mysqli_fetch_array($tampil)):
+                $ekstensi_foto = array('png', 'jpg');
+                $ekstensi_video = array('mp4');
+                $file = $data['nama_file'];
+                $x = explode('.', $file);
+                $ekstensi = strtolower(end($x));
+
+                echo '<div class="row justify-content-center">';
+                echo '  <div class="col-sm-3">';
+                echo '    <div class="card bg-white text-white mb-4">';
+                echo '      <div class="card-body" style="weight: 200px; height: 250px; display: flex; align-items: center; justify-content: center;">';
+                if (in_array($ekstensi, $ekstensi_foto) === true) { ?>
+                  <h3 class="row justify-content-center zoomeffect" style="color: black;">
+                    <img src="<?php echo "../img/".$data['nama_file']?>"style="max-height: 200px; max-width: 200px;">
+                  </h3>
+                <?php } else if (in_array($ekstensi, $ekstensi_video) === true) { ?>
+                  <h3 class="row justify-content-center" style="color: black;">
+                    <video width="200px" height="200px" controls>
+                      <source src="<?php echo "../img/".$data['nama_file']?>" type="video/mp4">
+                    </video>
+                  </h3>
+                <?php } else { ?>
+                  <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
+                <?php }
+                echo '      </div>';
+                echo '    </div>';
+                echo '  </div>';
+                echo '</div>';
+              endwhile;
             ?>
-
-            <tr>
-              <center>
-                <td>
-                  <?php
-                    $ekstensi_foto = array('png', 'jpg');
-                    $ekstensi_video = array('mp4');
-                    $file = $data['nama_file'];
-                    $x = explode('.', $file);
-                    $ekstensi = strtolower(end($x)); ?>
-
-                    <?php if (in_array($ekstensi, $ekstensi_foto) === true) { ?>
-                      <img src="<?php echo "../img/".$data['nama_file']?>"style="width: 200px;">
-                    <?php } else if (in_array($ekstensi, $ekstensi_video) === true) { ?>
-                      <video width="200px" height="200px" controls>
-                        <source src="<?php echo "../img/".$data['nama_file']?>" type="video/mp4">
-                      </video>';
-                    <?php } ?>
-                </td>
-              </center>
-            </tr>
-            <?php endwhile;?>
-          </table>
+          </div>
+        </div>
         <!-- /.container-fluid -->
       </div>
       <!-- End of Main Content -->

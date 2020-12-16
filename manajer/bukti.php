@@ -150,41 +150,73 @@
           <div class="card shadow mb-4 bg-primary">
             <div class="card-header bg-warning text-center" style="margin-bottom: 20px; font-size: 20px; color: white; font-weight: bold;">Bukti Kebersihan dan Kerapian</div>
 
-            <div class="row justify-content-center">
-              <div class="col-sm-3">
-                <div class="card bg-white text-white mb-4">
-                  <div class="card-body" style="weight: 200px; height: 200px;">
-                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
-                  </div>
-                </div>
-              </div>
+            <?php
+              require_once('../lib/db_login.php');
 
-              <div class="col-sm-3">
-                <div class="card bg-white text-white mb-4">
-                  <div class="card-body" style="weight: 200px; height: 200px;">
-                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
-                  </div>
-                </div>
-              </div>
-            </div>
+              $id = $_GET['id'];
 
-            <div class="row justify-content-center">
-              <div class="col-sm-3">
-                <div class="card bg-white text-white mb-4">
-                  <div class="card-body" style="weight: 200px; height: 200px;">
-                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
-                  </div>
-                </div>
-              </div>
+              $query = "SELECT * FROM laporan WHERE id_laporan = '$id'";
+              $result = $db->query($query);
+              if (!$result) {
+                die ("Could not query the database: <br />".$db->error);
+              }
 
-              <div class="col-sm-3">
-                <div class="card bg-white text-white mb-4">
-                  <div class="card-body" style="weight: 200px; height: 200px;">
-                    <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
+              while ($row = $result->fetch_object()) {
+                if ($row->status == "BELUM") { ?>
+                  <div class="row justify-content-center">
+                    <div class="col-sm-3">
+                      <div class="card bg-white text-white mb-4">
+                        <div class="card-body" style="weight: 200px; height: 200px; display: flex; align-items: center; justify-content: center;">
+                          <h3 class="row justify-content-center text-center" style="color: black;">Belum <br> ada Bukti</h3>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
+                <?php }
+              }
+            ?>
+
+            <?php
+              $id = $_GET['id'];
+
+              $server = "localhost";
+              $user = "root";
+              $pass = "";
+              $database = "db_kokeru";
+
+              $koneksi = mysqli_connect($server, $user, $pass, $database) or die(mysqli_error($koneksi));
+
+              $tampil = mysqli_query($koneksi, "SELECT * FROM bukti WHERE id_laporan = '$id'");
+              while ($data = mysqli_fetch_array($tampil)):
+                $ekstensi_foto = array('png', 'jpg');
+                $ekstensi_video = array('mp4');
+                $file = $data['nama_file'];
+                $x = explode('.', $file);
+                $ekstensi = strtolower(end($x));
+
+                echo '<div class="row justify-content-center">';
+                echo '  <div class="col-sm-3">';
+                echo '    <div class="card bg-white text-white mb-4">';
+                echo '      <div class="card-body" style="weight: 200px; height: 250px; display: flex; align-items: center; justify-content: center;">';
+                if (in_array($ekstensi, $ekstensi_foto) === true) { ?>
+                  <h3 class="row justify-content-center zoomeffect" style="color: black;">
+                    <img src="<?php echo "../img/".$data['nama_file']?>"style="max-height: 200px; max-width: 200px;">
+                  </h3>
+                <?php } else if (in_array($ekstensi, $ekstensi_video) === true) { ?>
+                  <h3 class="row justify-content-center" style="color: black;">
+                    <video width="200px" height="200px" controls>
+                      <source src="<?php echo "../img/".$data['nama_file']?>" type="video/mp4">
+                    </video>
+                  </h3>
+                <?php } else { ?>
+                  <h3 class="row justify-content-center" style="color: black;">Foto / Video</h3>
+                <?php }
+                echo '      </div>';
+                echo '    </div>';
+                echo '  </div>';
+                echo '</div>';
+              endwhile;
+            ?>
           </div>
         </div>
         <!-- /.container-fluid -->

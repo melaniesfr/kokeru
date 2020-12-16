@@ -5,8 +5,9 @@
   $pdf->AddPage();
 
   date_default_timezone_set('Asia/Jakarta');
-  $tanggal = date('Y-m-d');
-  // $tanggal = '2020-12-15';
+  // $tanggal = date('Y-m-d');
+  // $tanggal = '2020-12-16';
+  $tanggal = '2020-12-01';
 
   if (date('N') == 1) {
     $day = "Senin";
@@ -28,7 +29,8 @@
   $pdf->Cell(0,7,'LAPORAN HARIAN KEBERSIHAN DAN KERAPIAN RUANG GEDUNG BERSAMA MAJU',0,1,'C');
 
   $pdf->SetFont('Times','B',12);
-  $pdf->Cell(0,7,'Hari '.$day.' Tanggal '.date('d F Y').'',0,1,'C');
+  // $pdf->Cell(0,7,'Hari '.$day.' Tanggal '.date('d F Y').'',0,1,'C');
+  $pdf->Cell(0,7,'Hari Selasa Tanggal 1 '.date('F Y').'',0,1,'C');
 
   $pdf->SetFont('Times','',12);
   $pdf->Cell(0,7,'<<Tanggal Cetak '.date('d F Y').' Jam '.date('H:i').' WIB>>',0,1,'C');
@@ -46,7 +48,10 @@
 
   require('../lib/db_login.php');
 
-  $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
+  // $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
+
+  $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' AND l.status = 'SUDAH' ORDER BY r.id_ruang";
+
   $result = $db->query($query);
   if (!$result) {
     die ("Could not query the database: <br>".$db->error."<br>Query: ".$query);
