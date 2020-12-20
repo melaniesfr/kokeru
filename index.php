@@ -85,8 +85,7 @@
           <div class="row">
             <?php
               date_default_timezone_set('Asia/Jakarta');
-              // $tanggal = date('Y-m-d');
-              $tanggal = '2020-12-16';
+              $tanggal = date('Y-m-d');
 
               $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.id_laporan AS id_laporan, l.status AS status, l.tanggal AS tanggal FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
               $result = $db->query($query);

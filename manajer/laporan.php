@@ -176,8 +176,7 @@
                     $day = "Minggu";
                   }
 
-                  echo '<h3 class="row justify-content-center">Hari '.$day.' Tanggal '.date('d F Y').'</h3>';
-                  // echo '<h3 class="row justify-content-center">Hari Selasa Tanggal 1 '.date('F Y').'</h3>';
+                  echo '<h3 class="row justify-content-center">Hari '.$day.' Tanggal 16 '.date('F Y').'</h3>';
                   echo '<p class="row justify-content-center">&lt;&lt;Tanggal Cetak '.date('d F Y').' Jam '.date('H:i').' WIB&gt;&gt;</p>';
                 ?>
             </div>
@@ -197,13 +196,9 @@
                   <tbody class="text-center">
                     <?php
                       date_default_timezone_set('Asia/Jakarta');
-                      // $tanggal = date('Y-m-d');
-                      $tanggal = '2020-12-16';
-                      // $tanggal = '2020-12-01';
+                      $tanggal = date('Y-m-d');
 
                       $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' ORDER BY r.id_ruang";
-
-                      // $query = "SELECT r.nama_ruang AS nama_ruang, cs.email AS email, cs.nama_cs AS nama_cs, l.status AS status FROM ruang r JOIN cs ON r.id_cs = cs.id_cs JOIN laporan l ON l.id_ruang = r.id_ruang WHERE l.tanggal = '$tanggal' AND l.status = 'SUDAH' ORDER BY r.id_ruang";
 
                       $result = $db->query($query);
                       if (!$result) {
